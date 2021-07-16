@@ -1,32 +1,67 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+   <v-app id="inspire">
+    <v-app-bar
+      app
+      color="grey lighten-3"
+      flat
+    >
+      <v-container class="py-0 fill-height">
+        <v-avatar v-if="isLogin"
+          class="mr-10"
+          color="grey darken-1"
+          size="32"
+        ></v-avatar>
+
+        <v-btn v-else router :to="{name: 'login'}"
+          class="mr-10"
+        > Login </v-btn>
+
+        <v-btn
+          router :to="{name: 'mypage'}"
+          text
+        >
+          Mypage
+        </v-btn>
+        <v-btn
+          text
+        >
+          Products
+        </v-btn>
+        <v-btn
+          text
+        >
+          Live
+        </v-btn>
+        <v-btn
+          text
+          router :to="{name: 'upload'}"
+        >
+          Upload
+        </v-btn>
+        <v-btn
+          text
+          @click="$store.dispatch('logout')"
+        >
+          Logout
+        </v-btn>
+
+        <v-spacer></v-spacer>
+
+      </v-container>
+    </v-app-bar>
+
+    <v-main>
+        <routerView/>
+      </v-main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<script>
+import {mapState} from "vuex"
+  export default {
+    data: () => ({ drawer: null}),
+    computed: {
+      ...mapState(["isLogin"])
+    },
+  }
+</script>
