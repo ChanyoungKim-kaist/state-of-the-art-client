@@ -2,8 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import store from "../store/index"
+import Dashboard from '../views/Dashboard.vue'
+import GridSystem from '../views/GridSystem.vue'
+
 
 Vue.use(VueRouter)
+
+
 
 const rejectAuthUser = (to, from, next) => {
   if (store.state.isLogin) {
@@ -56,6 +61,16 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Upload.vue')
+  },
+  {
+    path: '/',
+    name: 'Dashboard',
+    component: Dashboard
+  },
+  {
+    path: '/grid-system',
+    name: 'GridSystem',
+    component: GridSystem
   }
 ]
 

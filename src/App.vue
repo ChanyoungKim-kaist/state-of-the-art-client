@@ -1,67 +1,55 @@
 <template>
-   <v-app id="inspire">
+  <v-app>
     <v-app-bar
       app
-      color="grey lighten-3"
-      flat
+      color="primary"
+      dark
     >
-      <v-container class="py-0 fill-height">
-        <v-avatar v-if="isLogin"
-          class="mr-10"
-          color="grey darken-1"
-          size="32"
-        ></v-avatar>
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
 
-        <v-btn v-else router :to="{name: 'login'}"
-          class="mr-10"
-        > Login </v-btn>
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
 
-        <v-btn
-          router :to="{name: 'mypage'}"
-          text
-        >
-          Mypage
-        </v-btn>
-        <v-btn
-          text
-        >
-          Products
-        </v-btn>
-        <v-btn
-          text
-        >
-          Live
-        </v-btn>
-        <v-btn
-          text
-          router :to="{name: 'upload'}"
-        >
-          Upload
-        </v-btn>
-        <v-btn
-          text
-          @click="$store.dispatch('logout')"
-        >
-          Logout
-        </v-btn>
+      <v-spacer></v-spacer>
 
-        <v-spacer></v-spacer>
-
-      </v-container>
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
-        <routerView/>
-      </v-main>
+      <router-view/>
+    </v-main>
   </v-app>
 </template>
 
 <script>
-import {mapState} from "vuex"
-  export default {
-    data: () => ({ drawer: null}),
-    computed: {
-      ...mapState(["isLogin"])
-    },
-  }
+
+export default {
+  name: 'App',
+
+  data: () => ({
+    //
+  }),
+};
 </script>
