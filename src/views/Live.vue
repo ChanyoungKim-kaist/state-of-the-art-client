@@ -16,14 +16,15 @@
               style="overflow: auto"
             >
             
-              <v-list two-line>
+              <v-list  v-for="(user, i) in { userInfo }" two-line
+                :key="i">
                 <v-list-item>
                     <v-list-item-avatar>
-                    <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+                    <v-img v-bind:src="user.avatar" ></v-img>
                     </v-list-item-avatar>
                     <v-list-item-content>
-                    <v-list-item-title>John Leider</v-list-item-title>
-                    <v-list-item-subtitle>Author</v-list-item-subtitle>
+                    <v-list-item-title>{{user.first_name}}</v-list-item-title>
+                    <v-list-item-subtitle>{{user.last_name}}</v-list-item-subtitle>
                     </v-list-item-content>
                 </v-list-item>
                 </v-list>
@@ -86,7 +87,7 @@
             <v-carousel :show-arrows="false" height="auto">
                 <v-carousel-item
                 v-for="(item,i) in items"
-                :key="i"
+                :key="i+'A'"
                 :src="item.src"
                 ></v-carousel-item>
             </v-carousel>
@@ -174,6 +175,7 @@
 </template>
 
 <script>
+import {mapState} from "vuex"
 
 export default {
     data() {
@@ -191,17 +193,21 @@ export default {
             isNow: true,
             timeline: [
                 {text: "5000", id: "2", time: "20"},
-                {text: "hello", id: "2", time: "20"},
-                {text: "hello", id: "2", time: "20"},
+                {text: "hello", id: "3", time: "20"},
+                {text: "hello", id: "4", time: "20"},
             
             ],
-            fasttime: '3:30'
+            fasttime: '3:30',
+            dialog: null,
         }
     },
     methods: {
         high(){
 
         }
+    },
+    computed: {
+        ...mapState(["userInfo"])
     },
     watch: {
 

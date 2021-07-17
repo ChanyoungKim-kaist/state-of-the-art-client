@@ -40,7 +40,6 @@
               color="primary"
               @click="login({email, password})"
             > 로그인 </v-btn>
-
             </div>
           </v-card>
         </v-flex>
@@ -50,6 +49,7 @@
 
 <script>
 import { mapState, mapActions} from "vuex"
+
   export default {
     data() {
       return {
@@ -62,6 +62,6 @@ import { mapState, mapActions} from "vuex"
     },
     methods: {
       ...mapActions(["login"]),
-    }
+     }
   }
 </script>

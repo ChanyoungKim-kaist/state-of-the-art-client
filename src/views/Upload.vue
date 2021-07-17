@@ -159,7 +159,7 @@
                             </v-flex>
                    
                             <v-flex pa-2>
-                                <v-checkbox v-model="checkbox">
+                                <v-checkbox >
                                 <template v-slot:label>
                                     제품의 정품 인증서를 보유하고 있습니다.
                                 </template>
