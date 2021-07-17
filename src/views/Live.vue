@@ -27,77 +27,52 @@
                     </v-list-item-content>
                 </v-list-item>
                 </v-list>
-
-                <v-list two-line>
-                <v-list-item>
-                    <v-list-item-avatar>
-                    <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                    <v-list-item-title>John Leider</v-list-item-title>
-                    <v-list-item-subtitle>Author</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                </v-list>
-
-                <v-list two-line>
-                <v-list-item>
-                    <v-list-item-avatar>
-                    <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                    <v-list-item-title>John Leider</v-list-item-title>
-                    <v-list-item-subtitle>Author</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                </v-list>
-
-                <v-list two-line>
-                <v-list-item>
-                    <v-list-item-avatar>
-                    <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                    <v-list-item-title>John Leider</v-list-item-title>
-                    <v-list-item-subtitle>Author</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                </v-list>
-                <v-list two-line>
-                <v-list-item>
-                    <v-list-item-avatar>
-                    <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                    <v-list-item-title>John Leider</v-list-item-title>
-                    <v-list-item-subtitle>Author</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                </v-list>
-                <v-list two-line>
-                <v-list-item>
-                    <v-list-item-avatar>
-                    <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                    <v-list-item-title>John Leider</v-list-item-title>
-                    <v-list-item-subtitle>Author</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                </v-list>
-                <v-list two-line>
-                <v-list-item>
-                    <v-list-item-avatar>
-                    <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                    <v-list-item-title>John Leider</v-list-item-title>
-                    <v-list-item-subtitle>Author</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                </v-list>
-                 
             </v-sheet>
+            <v-row justify="center">
+                <v-dialog
+                v-model="dialog"
+                persistent
+                max-width="290"
+                >
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                    color="primary"
+                    dark
+                    fab
+                    v-bind="attrs"
+                    v-on="on"
+                    >
+                    <v-icon> mdi-plus </v-icon>
+                    </v-btn>
+                </template>
+                <v-card>
+                    <v-card-title class="text-w7">
+                    경매에 참여하시겠습니까?
+                    </v-card-title>
+                    <v-card-text> 
+                        경매에 참여하기를 원하신다면, 확인을 눌러주세요. 
+                        경매 참여 시 사용자의 정보가 화면에 보여집니다.
+                    </v-card-text>
+                    <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="green darken-1"
+                        text
+                        @click="dialog = false"
+                    >
+                        취소
+                    </v-btn>
+                    <v-btn
+                        color="green darken-1"
+                        text
+                        @click="dialog = false"
+                    >
+                        확인
+                    </v-btn>
+                    </v-card-actions>
+                </v-card>
+                </v-dialog>
+            </v-row>
           </v-col>
 
           <v-col
@@ -187,8 +162,13 @@
         </v-layout>
       </v-container>
 
-      <v-container v-else >
-        
+      <v-container v-else>
+          <v-layout justify-center align-center style="height: 700px">
+          <v-flex xs12 text-center class="title">
+                <h1> 지금은 경매 시작 전입니다! 🔔 </h1>
+                <p> 가장 빠른 경매 시작 시간은 {{fasttime}} 입니다. </p>
+            </v-flex>
+            </v-layout>
       </v-container>
     </v-main>
 </template>
@@ -214,7 +194,8 @@ export default {
                 {text: "hello", id: "2", time: "20"},
                 {text: "hello", id: "2", time: "20"},
             
-            ]
+            ],
+            fasttime: '3:30'
         }
     },
     methods: {

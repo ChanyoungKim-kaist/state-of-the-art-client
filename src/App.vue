@@ -41,9 +41,23 @@
         </v-btn>
         <v-btn
           text
+          v-if="isLogin"
           @click="$store.dispatch('logout')"
         >
           Logout
+        </v-btn>
+        <v-btn
+          text
+          v-else
+          router :to="{name: 'signup'}"
+        >
+          SignUp
+        </v-btn>
+        <v-btn
+          text
+          router :to="{name: 'game'}"
+        >
+          Game
         </v-btn>
 
         <v-spacer></v-spacer>
