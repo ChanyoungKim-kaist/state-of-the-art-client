@@ -13,7 +13,7 @@
           <v-alert
           class ="mb-3"
           :value="isLoginError"
-          type="error"
+          type="error" 
           >
             아이디와 비밀번호를 확인해주세요.
           </v-alert>

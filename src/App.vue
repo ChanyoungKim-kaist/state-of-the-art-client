@@ -29,6 +29,7 @@
         </v-btn>
         <v-btn
           text
+          router :to="{name: 'live'}"
         >
           Live
         </v-btn>
