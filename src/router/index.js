@@ -60,10 +60,31 @@ const routes = [
   {
     path: '/live', 
     name: 'live',
+    beforeEnter: onlyAuthUser,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Live.vue')
+  },
+  {
+    path: '/mypage', 
+    name: 'mypage',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Mypage.vue')
+  },
+  {
+    path: '/mypage/mypage1', 
+    name: 'mypage1',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Mypage1.vue')
+  },
+  {
+    path: '/mypage/mypage2', 
+    name: 'mypage2',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Mypage2.vue')
+  },
+  {
+    path: '/mypage/mypage3', 
+    name: 'mypage3',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Mypage3.vue')
   },
   
 ]
