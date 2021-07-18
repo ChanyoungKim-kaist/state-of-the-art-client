@@ -121,6 +121,16 @@ $(document).on('click','#cardTable td' ,function(){
             scorePlus()
             if(++openedCtn == 8){
                 alert('성공!! \n'+score+'점 입니다!')
+                axios.post("", score, config)
+                    .then( res => {
+                        if (!res.data.ok) {
+                            alert ('점수 등록에 실패했습니다.')
+                        }
+                    })
+                    .catch( () => {
+                        alert('통신 실패')
+                    })
+
             }
         }else { //불일치
             setTimeout(back, 1000)
@@ -161,15 +171,25 @@ function scoreMinus(){
 }
 
 export default {
-  methods: {
-    gameStart: function () {
-      console.log('게임시작')
-      if (gameState === '') {
-        startGame()
-        gameState = 'alreadyStart'
-      }
+    data() {
+        return {
+            token: localStorage.getItem("access_token"),
+            config: {
+                headers: {
+                    "token": this.token
+                }
+            },
+        }
+    },
+    methods: {
+        gameStart: function () {
+        console.log('게임시작')
+        if (gameState === '') {
+            startGame()
+            gameState = 'alreadyStart'
+        }
+        }
     }
-  }
 }
 </script>
 

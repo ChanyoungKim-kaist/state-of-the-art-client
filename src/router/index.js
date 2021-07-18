@@ -27,7 +27,7 @@ const onlyAuthUser = (to, from, next) => {
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   {

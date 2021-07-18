@@ -29,6 +29,7 @@
         </v-btn>
         <v-btn
           text
+          
           router :to="{name: 'live'}"
         >
           Live
@@ -55,6 +56,7 @@
         </v-btn>
         <v-btn
           text
+          @click="alert"
           router :to="{name: 'game'}"
         >
           Game
@@ -72,11 +74,17 @@
 </template>
 
 <script>
-import {mapState} from "vuex"
+import {mapState, mapActions} from "vuex"
   export default {
     data: () => ({ drawer: null}),
     computed: {
       ...mapState(["isLogin"])
     },
+    methods: {
+      ...mapActions(["checkNow"]),
+      alert() {
+        
+      }
+    }
   }
 </script>
