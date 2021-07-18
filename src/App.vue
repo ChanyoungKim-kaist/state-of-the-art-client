@@ -19,15 +19,9 @@
         <v-btn
           router :to="{name: 'mypage'}"
           text
-        > Mypage </v-btn>
-
-        <v-btn
-          @click="$router.push({path: '/'})"
-          text
         >
-          Test
+          Mypage
         </v-btn>
-
         <v-btn
           text
         >
