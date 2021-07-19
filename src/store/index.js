@@ -20,7 +20,7 @@ import {
   // Vector3,
   // Line
 } from "three-full";
-import { BoxGeometry, DoubleSide,  HemisphereLight, MeshLambertMaterial, 
+import { BoxGeometry, DoubleSide,  MeshLambertMaterial, 
   MeshStandardMaterial, PlaneBufferGeometry, PointLight, TextureLoader } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
@@ -154,10 +154,10 @@ export default new Vuex.Store({
       // lights
       var ambientLight = new AmbientLight(0x202020);
       state.scene.add(ambientLight)
-      var hemilight = new HemisphereLight(0xffffbb, 0x080820, 1)
-      hemilight.color.setHSL(0.6, 1, 0.1)
+      // var hemilight = new HemisphereLight(0xffffbb, 0x080820, 1)
+      // hemilight.color.setHSL(0.6, 1, 0.1)
       //hemilight.groundColor.setHSL(0.1, 0.2, 0.1)
-      state.scene.add(hemilight)
+     // state.scene.add(hemilight)
       var pointlight = new PointLight(0xffffff, 1, 100)
       pointlight.position.set(0, 10, 5)
       state.scene.add(pointlight)
@@ -182,26 +182,26 @@ export default new Vuex.Store({
       // var gridHelper = new GridHelper(100,20)
       // state.scene.add(gridHelper)
 
-      function generateImage(caption) {
-        const inputs= {
-          "caption": caption
-        };
-        fetch('http://localhost:8001/query', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-type': 'application/json'
-          },
-          body: JSON.stringify(inputs)
-        }) 
-          .then(response=> response.json())
-          .then(outputs => {
-            const { result } = outputs;
-            //console.log(result)
-            addBox(result)
-          })
-      }
-      generateImage('a boat on the river')
+      // function generateImage(caption) {
+      //   const inputs= {
+      //     "caption": caption
+      //   };
+      //   fetch('http://localhost:8001/query', {
+      //     method: 'POST',
+      //     headers: {
+      //       Accept: 'application/json',
+      //       'Content-type': 'application/json'
+      //     },
+      //     body: JSON.stringify(inputs)
+      //   }) 
+      //     .then(response=> response.json())
+      //     .then(outputs => {
+      //       const { result } = outputs;
+      //       //console.log(result)
+      //       addBox(result)
+      //     })
+      // }
+      // generateImage('a boat on the river')
 
 
       // // Axis Line 1

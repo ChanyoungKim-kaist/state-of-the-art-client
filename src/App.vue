@@ -37,7 +37,7 @@
   </v-container>
 </v-app>  
 <v-app v-else >
-  <v-app-bar app flat color="transparent">
+  <v-app-bar app flat color="transparent" height="0" class="mt-5">
       <v-container fluid>
         <v-row class="align-center no-gutters mt-12 " justify="space-between">
           <v-col>
@@ -49,20 +49,20 @@
               width="180"
               src="./assets/main_1.svg"
               contain
-              class="title"
+              
             ></v-img>
             <v-img
               v-else
               width="180"
               src="./assets/main_2.svg"
               contain
-              class="title"
+          
             ></v-img>
           </v-hover>
           </v-col>
           
           <v-col align="end">
-            <v-btn text>
+            <v-btn text router :to="{name: 'products'}">
               <span class="mr-2 fa-stack fa-1x">
                 <i class="fas fa-palette"></i>
               </span>

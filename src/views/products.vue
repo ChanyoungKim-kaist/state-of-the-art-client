@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <panel></panel> -->
     <viewport></viewport>
   </div>
 </template>
