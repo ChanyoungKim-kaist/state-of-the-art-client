@@ -201,9 +201,6 @@
 
 <script>
 import axios from "axios"
-const WebSocket = require('ws')
-const ws = new WebSocket('ws://192.249.18.172:443')
-
 export default {
     mounted() {
         this.checkNow()
@@ -263,13 +260,8 @@ export default {
         },
         high(){ // 새로운 입찰가 
             this.newprice = null
-            ws.on('open', function open(){
-                console.log("socket connection available")
-                ws.send({
-                    "price": this.newprice,
-                    "user": this.user
-                })
-            }).then(res2=>{ 
+            axios.post("https://reqres.in/api/users/2", this.newprice, this.config)
+            .then(res2=>{ 
                 this.currentprice = this.newprice,
                 this.timeline = res2.data.data.timeline
                 this.countDown = 15
