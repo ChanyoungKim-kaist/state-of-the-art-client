@@ -24,6 +24,7 @@
         </v-btn>
         <v-btn
           text
+          router :to="{name: 'products'}"
         >
           Products
         </v-btn>

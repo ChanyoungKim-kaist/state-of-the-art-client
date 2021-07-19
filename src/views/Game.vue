@@ -120,7 +120,7 @@ $(document).on('click','#cardTable td' ,function(){
             openCardId2 = ''
             scorePlus()
             if(++openedCtn == 8){
-                alert('성공!! \n'+score+'점 입니다!')
+                alert('성공! \n'+score+'점 입니다!')
                 axios.post("", score, config)
                     .then( res => {
                         if (!res.data.ok) {

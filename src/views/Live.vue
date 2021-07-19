@@ -40,6 +40,7 @@
                     color="primary"
                     dark
                     fab
+                    :disabled="isIn"
                     v-bind="attrs"
                     v-on="on"
                     >
@@ -126,10 +127,39 @@
             sm="3"
           >
 
-          <v-flex xs12 text-center class="title">
+          <v-flex v-if="!change" xs12 text-center class="title">
+            <p> 현재 입찰가 </p>
+            <h1> {{ ArtInfo.currentprice }}  </h1>
+            <p> NB </p>
+            <v-text-field v-if="isIn"
+            label="원하는 입찰가를 입력해주세요."
+            type="number"
+            suffix="만원"
+            v-model="newprice"
+            >
+            </v-text-field>
+            <v-btn 
+            :disabled="newprice <= ArtInfo.currentprice"
+            elevation="2"
+            fab
+            height="100px"
+            width="100px"
+            class="mt-5"
+            @click="high">
+            <v-text class="icon">
+                👋🏻
+            </v-text>
+            </v-btn>
+
+        <div class="mt-7">
+            {{countDown}}
+        </div>
+        </v-flex>
+
+        <v-flex v-else xs12 text-center class="title">
             <p> 현재 입찰가 </p>
             <h1> {{ currentprice }}  </h1>
-            <p> 만원</p>
+            <p> NB </p>
             <v-text-field v-if="isIn"
             label="원하는 입찰가를 입력해주세요."
             type="number"
@@ -173,12 +203,14 @@
 import axios from "axios"
 
 export default {
-    beforeMount() {
+    mounted() {
         this.checkNow()
+        this.checkisIn()
     },
     data() {
         return {
-            isIn: true,
+            isIn : false,
+            change : false,
             currentUsers: [],
             newprice: '',
             timerCount: 15,
@@ -187,21 +219,20 @@ export default {
             timeline: [],
             fasttime: '3:30',
             dialog: false,
-            currentprice: "ArtInfo".currentprice,
-            token: localStorage.getItem("access_token"),
-            config: {
-                headers: {
-                    "token": this.token
-                }
-            },
-            isNow: false,
+            currentprice: 0,
+            token: 0,
+            config: null,
+            isNow: true,
             ArtInfo: null,
             fastTime: '0:0'
         }
     },
     methods: {
+        checkisIn() {
+            this.isIn = localStorage.getItem("BidIn")
+        },
         checkNow() {
-            axios.get("")
+            axios.get("http://192.249.18.172:80/start_bidding/productid/10")
                 .then(res2 => {
                 if (res2.data.ok) {
                     this.isNow = true
@@ -211,7 +242,15 @@ export default {
                         context : res2.data.data.context,
                         pictures : res2.data.data.pictures
                     }
+                    this.currentUsers = res2.data.data.currentUsers
                     this.ArtInfo = ArtInfo
+                    this.token = localStorage.getItem("access_token")
+                    this.config = {
+                            headers: {
+                                "token": this.token
+                            }
+                    },
+                    console.log(this.token)
                 } else {
                     this.fastTime = res2.data.fasttime
                 }
@@ -234,10 +273,11 @@ export default {
         },
         enterAuction() { //경매에 참여하기
             this.dialog = false
-            axios.get("https://reqres.in/api/users/2", this.config)
+            axios.get("http://192.249.18.172:80/start_bidding/productid/10/participate", this.config)
             .then(res3=>{ 
                 this.currentUsers = res3.data.currentUsers
-                this.isIn = true
+                localStorage.setItem("BidIn", true)
+                this.checkisIn()
             })
             .catch(()=>{ alert('경매 참여에 실패했습니다.') })
         },
