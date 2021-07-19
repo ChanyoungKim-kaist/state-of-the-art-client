@@ -341,6 +341,7 @@ export default new Vuex.Store({
               MyArt : response.data.data.MyArt
             }
             commit('loginSuccess', userinfo)
+            router.push({name: "main"}) 
           }
           else alert('이메일과 비밀번호를 확인하세요.')
         })

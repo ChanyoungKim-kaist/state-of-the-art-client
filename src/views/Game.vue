@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<v-container fluid >
     <v-layout column>
         <v-flex xs12 text-center class="title">
             <h1> 같은 그림 찾기 🎨 </h1>
