@@ -32,7 +32,7 @@
           미술관 둘러보기
         </v-btn>
         <audio  id="audioval" 
-          src="https://server38.freeconvert.com/converted/ebc491017253/Bubble-Jump_AdobeStock_331813116_preview.mp3"
+          src="https://storage.cloudconvert.com/tasks/7dd9cba2-aed0-46ad-b7ff-1d217b141dbc/Bubble-Jump_AdobeStock_331813116_preview.mp3?AWSAccessKeyId=cloudconvert-production&Expires=1626907093&Signature=nnG43SqMxeV%2BcRQVu4zdpglirAY%3D&response-content-disposition=inline%3B%20filename%3D%22Bubble-Jump_AdobeStock_331813116_preview.mp3%22&response-content-type=audio%2Fmpeg"
         autoplay loop></audio>
     </v-row>  
     </v-col>

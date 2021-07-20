@@ -488,7 +488,18 @@ export default {
                 console.log(this.timeline, this.timePassed, this.countDown)
                 if (this.countDown == 0) {
                     localStorage.setItem("BidIn", false) 
+                    if (this.timeline[this.timeline.length -1].user_id == "userInfo".username ) {
+                        axios.post("http://192.249.18.172:80/drawings/myart", this.timeline[this.timeline.length -1].price, this.config)
+                        .then(res=>{ 
+                            if (res.data.ok) {
+                                alert('경매에 성공했습니다.')
+                            }
+                        })
+                        .catch(()=>{ alert('통신 실패') })
+                    }
+
                     this.isNow = false
+
                 }
              }
         }
