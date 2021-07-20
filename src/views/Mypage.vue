@@ -1,8 +1,10 @@
 <template>
-    <v-layout column>
-        <v-flex >
-            <v-layout row mt-10>
-                <v-flex  text-xs-center row wrap align-center xs8>
+<v-app fill-height >
+    <v-main class="yellow">
+        <v-container fluid>
+            <v-layout row>
+                <v-col cols="12" sm="6" >
+                    <v-flex class="primary">
                     <v-layout align-center justify-center column pa-5>
                         <v-item-avatar height="200" width="200" class="mb-10">
                             <!-- <img src="https://cdn.vuetifyjs.com/images/john.jpg"> -->
@@ -15,9 +17,12 @@
                             <v-text> NB </v-text>
                         </v-flex>
                     </v-layout>
-                </v-flex>
+                    </v-flex>
 
-                <v-flex class="bg" xs4>
+                </v-col>
+
+                <v-col cols="12" sm="6">
+
                     <v-layout column pa-5>
                         <v-flex pa-2 mt-15>
                             <v-text class="gallery"> My Gallery </v-text>
@@ -52,10 +57,9 @@
                                 </v-carousel-item>
                             </v-carousel>
                         </v-flex>  
-                    </v-layout>
-                </v-flex> 
+                    </v-layout></v-col>
             </v-layout>
-        </v-flex>
+
         <v-footer
     padless
     fixed
@@ -71,8 +75,9 @@
         autoplay loop></audio>
     </v-card>
 </v-footer>
-    </v-layout>
-    
+</v-container>
+</v-main>
+</v-app>    
 </template>
 
 <script>
@@ -151,15 +156,7 @@ export default {
 
 }
 
-.title {
-    padding-top: 30px;
-    font-family: KakaoBig,Apple SD Gothic Neo,Malgun Gothic,맑은 고딕,sans-serif;
-    font-size: 46px;
-    line-height: 60px;
-    color: var(--baseForeground);
-    letter-spacing: -1px;
-    background-size: 72px 72px;
-}
+
 
 .bg {
     background-color: black;
