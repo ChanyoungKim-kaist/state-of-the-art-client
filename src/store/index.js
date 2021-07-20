@@ -319,6 +319,7 @@ export default new Vuex.Store({
     logout({commit}){
       commit("logout")
       localStorage.removeItem('access_token')
+      localStorage.removeItem('BinIn')
       router.push({name: "home"}) 
     },
     getMemberInfo({commit}) {

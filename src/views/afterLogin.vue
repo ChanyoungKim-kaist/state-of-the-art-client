@@ -41,9 +41,8 @@
               <span class="mr-2 fa-stack fa-1x">
                 <i class="fas fa-puzzle-piece"></i>
               </span>
-              game
+              games
             </v-btn>
-            
             
           </v-col>
 
@@ -57,11 +56,14 @@
   </v-app>
 </template>
 <script>
-
+// import {mapActions} from "vuex"
 export default {
   components:{
 
-  }
+  },
+  // methods: {
+  //   ...mapActions(["logout"]),
+  // },
   
 }
 </script>

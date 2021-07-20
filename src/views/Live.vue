@@ -1,21 +1,23 @@
 <template>
-    <v-main class="grey lighten-2">
-      <v-container v-if="isNow">
+<v-app fill-height>
+    <v-main class="cyan darken-3 pt-10" >
+      <v-container v-if="isNow" >
         <v-layout row>
-          <v-flex xs12 text-center class="title">
-                <h1> {{ArtInfo.title}} </h1>
-                <p> {{ArtInfo.context}}</p>
+          <v-flex xs12 text-center class="title mb-n5">
+                <!-- <h1> {{ArtInfo.title}} </h1> -->
+                <v-text class="artwork_title">Cleopatra Testing Poisons on Those Condemned to Death</v-text>
+                <!-- <p> {{ArtInfo.context}}</p> -->
+                <!-- <v-text class="">Cleopatra Testing Poisons on Condemned Prisoners (Cléopâtre essayant des poisons sur des condamnés à mort) is an 1887 painting by the French artist Alexandre Cabanel. It is now in the Royal Museum of Fine Arts, Antwerp. It shows Cleopatra VII sitting at a banquet observing the effects of poisons on prisoners condemned to death. Cabanel had always had a taste for historical and orientalist themes and when the painting was first seen by the Parisian public he was feted by the critics and showered with honours. Several international collectors attempted to buy the painting.</v-text> -->
             </v-flex>
           <v-col
             cols="12"
             sm="3"
           >
             <v-sheet
-              rounded="lg"
+              rounded="xl"
               height="400"
               style="overflow: auto"
             >
-            
               <v-list  v-for="(user, i) in currentUsers" two-line
                 :key="i">
                 <v-list-item>
@@ -23,7 +25,7 @@
                     <v-img v-bind:src="user.avatar" ></v-img>
                     </v-list-item-avatar>
                     <v-list-item-content>
-                    <v-list-item-title>{{user.name}}</v-list-item-title>
+                    <v-list-item-title class="userfont">{{user.name}}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
                 </v-list>
@@ -32,40 +34,65 @@
             <v-row justify="center">
                 <v-dialog
                 v-model="dialog"
-                persistent
-                max-width="290"
+                transition="dialog-bottom-transition"
+                width="400"
                 >
+               
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                    color="primary"
-                    dark
-                    fab
-                    :disabled="isIn"
-                    v-bind="attrs"
-                    v-on="on"
-                    >
-                    <v-icon> mdi-plus </v-icon>
-                    </v-btn>
+                    <v-hover v-slot="{hover}">
+                        <v-btn
+                        v-if="hover"
+                        class="mt-9 joinbtn"
+                        width="170"
+                        height="60"
+                        rounded
+                        color="black cyan--text"
+                        raised
+                        :ripple="false"
+                        :disabled="isIn"
+                        v-bind="attrs"
+                        v-on="on"
+                        >
+                        <i class="fas fa-sign-in-alt mr-3 rotate"></i>
+                        <v-text class="mr-1">Join</v-text>
+                        </v-btn>
+                        <v-btn
+                        v-else
+                        :ripple="false"
+                        class="mt-9 joinbtn"
+                        width="170"
+                        height="60"
+                        rounded
+                        color="white secondary--text"
+                        raised
+                        :disabled="isIn"
+                        v-bind="attrs"
+                        v-on="on"
+                        >
+                        <i class="fas fa-sign-in-alt mr-3"></i>
+                        <v-text class="mr-1">Join</v-text>
+                        </v-btn>
+                    </v-hover>
                 </template>
-                <v-card>
-                    <v-card-title class="text-w7">
+                <v-card class="rounded-xl" width="500">
+                    <v-card-title class="cardtitle">
                     경매에 참여하시겠습니까?
                     </v-card-title>
-                    <v-card-text> 
-                        경매에 참여하기를 원하신다면, 확인을 눌러주세요. 
+                    <v-card-text class="cardtext"> 
+                        경매에 참여하기를 원하신다면, 확인을 눌러주세요.
                         경매 참여 시 사용자의 정보가 화면에 보여집니다.
                     </v-card-text>
                     <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
-                        color="green darken-1"
+                        color="secondary"
                         text
                         @click="dialog = false"
                     >
                         취소
                     </v-btn>
                     <v-btn
-                        color="green darken-1"
+                        color="secondary"
                         text
                         @click="enterAuction"
                     >
@@ -82,43 +109,28 @@
             sm="6"
           >
             <v-sheet
-              rounded="lg"
               row wrap
+              class="transparent"
             >
-            <v-carousel :show-arrows="false" height="auto">
+            <!-- <v-carousel :show-arrows="false" height="auto">
                 <v-carousel-item
                 v-for="(item,i) in ArtInfo.pictures"
                 :key="i+'A'"
                 :src="item.src"
                 ></v-carousel-item>
-            </v-carousel>
+            </v-carousel> -->
 
-            <v-timeline dense clipped >
-                <v-slide-x-transition
-                    group
-                >
-                    <v-timeline-item 
-                    v-for="(event, i) in timeline"
-                    :key="i+'B'"
-                    class="mr-4 mb-4"
-                    color="pink"
-                    small
-                    >
-                    <v-row justify="space-between">
-                        <v-col
-                        cols="7"
-                        v-text="event.username" 
-                        ></v-col>
-                        
-                        <v-col
-                        class="text-right"
-                        cols="5"
-                        v-text="event.price"
-                        ></v-col>
-                    </v-row>
-                    </v-timeline-item>
-                </v-slide-x-transition>
-            </v-timeline>
+            <v-card elevation="9" tile class="mb-7">
+                <v-img
+                src="../assets/cleopatra.jpg">
+                </v-img>
+            </v-card>
+
+            <v-card elevation="7" class="pa-10 mb-12">
+                <v-card-title class="justify-center exp_title ">사형수들에게 독약을 시험하는 클레오파트라</v-card-title>
+                <v-card-subtitle class="exp_subtitle text-center">알렉상드르 카바넬, 1887</v-card-subtitle>
+                <v-card-text class="exp_text text-center">Cleopatra Testing Poisons on Condemned Prisoners (Cléopâtre essayant des poisons sur des condamnés à mort) is an 1887 painting by the French artist Alexandre Cabanel. It is now in the Royal Museum of Fine Arts, Antwerp. It shows Cleopatra VII sitting at a banquet observing the effects of poisons on prisoners condemned to death. Cabanel had always had a taste for historical and orientalist themes and when the painting was first seen by the Parisian public he was feted by the critics and showered with honours. Several international collectors attempted to buy the painting.</v-card-text>
+            </v-card>
             </v-sheet>
           </v-col>
 
@@ -128,62 +140,138 @@
           >
 
           <v-flex v-if="!change" xs12 text-center class="title">
-            <p> 현재 입찰가 </p>
-            <h1> {{ ArtInfo.currentprice }}  </h1>
-            <p> NB </p>
-            <v-text-field v-if="isIn"
-            label="원하는 입찰가를 입력해주세요."
-            type="number"
-            suffix="만원"
-            v-model="newprice"
+            <p class="firstprice mb-8"> {{ ArtInfo.currentprice }} NB  </p>
+            <v-text-field
+                reverse
+                v-if="isIn"
+                append-icon="fas fa-coins mr-2"
+                label="Bid Now!"
+                type="number"
+                filled
+                solo
+                color="cyan darken-3"
+                v-model="newprice"
+                class="mybid "
             >
             </v-text-field>
-            <v-btn 
-            :disabled="newprice <= ArtInfo.currentprice"
-            elevation="2"
-            fab
-            height="100px"
-            width="100px"
-            class="mt-5"
-            @click="high">
-            <v-text class="icon">
-                👋🏻
-            </v-text>
-            </v-btn>
+            <v-hover v-slot="{hover}">
+                <v-btn 
+                v-if="hover"
+                :disabled="newprice <= ArtInfo.currentprice"
+                elevation="2"
+                fab
+                height="100px"
+                width="100px"
+                
+                class="hand2"
+                color="yellow"
+                :ripple="false"
+                @click="high">
+                <v-text class="icon">
+                    👋🏻
+                </v-text>
+                </v-btn>
+                <v-btn 
+                v-else
+                :disabled="newprice <= ArtInfo.currentprice"
+                elevation="2"
+                fab
+                height="100px"
+                width="100px"
+                color="white"
+                class="hand"
+                :ripple="false"
+                @click="high">
+                <v-text class="icon">
+                    👋🏻
+                </v-text>
+                </v-btn>
+            </v-hover>    
 
-        <div class="mt-7">
+        <div class="firstprice mt-4">
             {{countDown}}
         </div>
         </v-flex>
 
         <v-flex v-else xs12 text-center class="title">
-            <p> 현재 입찰가 </p>
-            <h1> {{ currentprice }}  </h1>
-            <p> NB </p>
-            <v-text-field v-if="isIn"
-            label="원하는 입찰가를 입력해주세요."
-            type="number"
-            suffix="만원"
-            v-model="newprice"
+            <p class="firstprice mb-8"> {{ ArtInfo.currentprice }} NB  </p>
+            <v-text-field 
+                reverse
+                v-if="isIn"
+                append-icon="fas fa-coins mr-2"
+                label="Bid Now!"
+                type="number"
+                filled
+                solo
+                color="cyan darken-3"
+                v-model="newprice"
+                class="mybid "
             >
             </v-text-field>
-            <v-btn 
-            :disabled="newprice <= currentprice"
-            elevation="2"
-            fab
-            height="100px"
-            width="100px"
-            class="mt-5"
-            @click="high">
-            <v-text class="icon">
-                👋🏻
-            </v-text>
-            </v-btn>
+            
+            <v-hover v-slot="{hover}">
+                <v-btn 
+                v-if="hover"
+                :disabled="newprice <= currentprice"
+                elevation="2"
+                fab
+                height="100px"
+                width="100px"
+                
+                class="hand2"
+                color="yellow"
+                :ripple="false"
+                @click="high">
+                <v-text class="icon">
+                    👋🏻
+                </v-text>
+                </v-btn>
+                <v-btn 
+                v-else
+                :disabled="newprice <= currentprice"
+                elevation="2"
+                fab
+                height="100px"
+                width="100px"
+                color="white"
+                class="hand"
+                :ripple="false"
+                @click="high">
+                <v-text class="icon">
+                    👋🏻
+                </v-text>
+                </v-btn>
+            </v-hover>    
 
-        <div class="mt-7">
+        <div class="firstprice mt-4">
             {{countDown}}
         </div>
         </v-flex>
+        <v-timeline dense class="mt-4" >
+                <v-slide-x-transition
+                    group
+                >
+                    <v-timeline-item 
+                    v-for="(event, i) in timeline"
+                    :key="i+'B'"
+                    class="mr-4 mb-4 userfont white--text"
+                    color="cyan darken-4"
+                    fill-dot
+                    small
+                    >
+                    <v-row justify="space-between">
+                        <v-col
+                        cols="7"
+                        >{{event.username}}</v-col>
+                        <v-col
+                        class="text-right userfont white--text"
+                        cols="5"
+                        >{{event.price}}</v-col>
+                    </v-row>
+                    </v-timeline-item>
+                </v-slide-x-transition>
+        </v-timeline>
+        
           </v-col>
         </v-layout>
       </v-container>
@@ -197,6 +285,7 @@
             </v-layout>
       </v-container>
     </v-main>
+</v-app>    
 </template>
 
 <script>
@@ -216,7 +305,7 @@ export default {
             timerCount: 15,
             timerCount2: 59,
             countDown : 15,
-            timeline: [],
+            timeline: [{username: 'nayeon', price:100}, {username: 'nayeon', price:100}, {username: 'nayeon', price:100}],
             fasttime: '3:30',
             dialog: false,
             currentprice: 0,
@@ -299,26 +388,144 @@ export default {
 
 <style scoped>
 
-.title {
-    font-family: KakaoBig,Apple SD Gothic Neo,Malgun Gothic,맑은 고딕,sans-serif;
-    font-size: 46px;
-    line-height: 60px;
-    color: var(--baseForeground);
-    letter-spacing: -1px;
-    background-size: 72px 72px;
+@font-face {
+    font-family: "AmalfiCoast";
+    src: local("AmalfiCoast"), url(../assets/fonts/AmalfiCoast.ttf) format("truetype");
+}
+@font-face {
+    font-family: "116watermelon";
+    src: local("116watermelon"), url(../assets/fonts/116watermelon.ttf) format("truetype");
 }
 
-.title2 {
-    font-family: KakaoBig,Apple SD Gothic Neo,Malgun Gothic,맑은 고딕,sans-serif;
-    font-size: 70px;
-    line-height: 60px;
-    color: var(--baseForeground);
-    letter-spacing: -1px;
-    background-size: 72px 72px;
+.hand{
+    animation:rotate infinite ;
+    animation-duration: 4s;
+
+}
+
+@keyframes rotate {
+  0% {transform: rotate(0deg); }
+  2% {transform: rotate(10deg);}
+  4% {transform: rotate(0deg);}
+  6% {transform: rotate(-10deg);}
+  8% {transform: rotate(0deg);}
+  10% {transform: rotate(10deg);}
+  12% {transform: rotate(0deg);}
+  14% {transform: rotate(-10deg);}
+  16% {transform: rotate(0deg);}
+  100% {transform: rotate(0deg);}
+
+
+  
+}
+
+.hand2{
+    animation:rotate2 infinite ;
+    animation-duration: 0.4s;
+
+}
+
+@keyframes rotate2 {
+  0% {transform: rotate(0deg); }
+  25% {transform: rotate(10deg);}
+  50% {transform: rotate(0deg);}
+  75% {transform: rotate(-10deg);}
+  100% {transform: rotate(0deg);}
+
+
+
+  
+}
+
+
+.firstprice{
+    font-family: abril-fatface, noto-sans-cjk-kr;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    color:rgb(255, 237, 72);
+    text-shadow: rgba(0, 0, 0, 0.637) 0px 0px 8px;
+}
+.mybid{
+    font-family: abril-fatface, noto-sans-cjk-kr;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+}
+
+.exp_title{
+font-family: noto-sans-cjk-kr, sans-serif;
+font-weight: 900;
+font-style: normal;
+font-size:28px;
+word-break: keep-all;
+text-align: center;
+letter-spacing: -0.6px;
+margin-bottom: 14px;
+}
+.exp_subtitle{
+font-family: noto-sans-cjk-kr, sans-serif;
+font-weight: 500;
+font-style: normal;
+letter-spacing: -0.1px;
+font-size:16px;
+}
+.exp_text{
+    font-family: raleway, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: black;
+    font-size:16px;
+    
 }
 
 .icon {
     font-size: 70px;
+}
+
+.artwork_title{
+    font-family: AmalfiCoast;
+    font-size: 50px;
+    color: rgba(245, 245, 245, 0.336);
+}
+
+.userfont{
+    font-family: raleway, sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    font-style: normal;
+}
+
+.joinbtn{
+    font-family: raleway, sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.1px;
+    font-style: normal;
+}
+.rotate{
+    transform: rotate(360deg);
+    transition: all 0.3s ease-in-out;
+    
+   
+}
+
+.cardtitle{
+    font-family: source-han-sans-korean, sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    letter-spacing: -0.3px;
+}
+.cardtext{
+    font-family: source-han-sans-korean, sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: -0.3px;
+    /* line-height: 150%; */
+}
+
+.v-btn::before {
+  background-color: transparent;
 }
 
 </style>
