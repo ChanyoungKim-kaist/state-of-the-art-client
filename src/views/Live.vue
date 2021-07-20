@@ -447,7 +447,7 @@ export default {
 
         enterAuction() { //경매에 참여하기
             this.dialog = false
-            axios.get("http://192.249.18.172:80/start_bidding/productid/10/participate", this.config)
+            axios.get("http://192.249.18.172:80/start_bidding/productid/9/participate", this.config)
             .then((res3)=>{ 
                 localStorage.setItem("BidIn", true)
                 this.currentUsers = res3.data.currentUsers
@@ -495,12 +495,10 @@ export default {
                             }
                         })
                         .catch(()=>{ alert('통신 실패') })
+                        this.isNow = false
                         this.isMine = true
                     }
                     else this.isNow = false
-
-                    
-
                 }
              }
         }
