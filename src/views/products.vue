@@ -17,9 +17,9 @@ export default {
 </script>
 
 <style>
-* {
+/* * {
    cursor: url(../assets/c2.png), grab;
-}
+} */
 
 html,
 body {

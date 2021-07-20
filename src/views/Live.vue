@@ -387,10 +387,10 @@ export default {
 </script>
 
 <style scoped>
-* {
+/* * {
    cursor: url(../assets/c3.png), grab;
 
-}
+} */
 
 @font-face {
     font-family: "AmalfiCoast";
