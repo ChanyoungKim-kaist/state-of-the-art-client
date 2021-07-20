@@ -96,9 +96,6 @@ export default {
     
         }
     },
-    created() {
-        this.selected = localStorage.getItem("likes")
-    },
     methods: {
         myfun(){
             alert('plz')
@@ -128,7 +125,7 @@ export default {
     },
     watch: {
         selected: function(data) {
-            localStorage.setItem("likes", data)
+            localStorage.setItem("selected", data)
             for(var k=0; k<data.length; k++){
                 this.arts[data[k]].like = !this.arts[data[k]].like
             }
@@ -147,6 +144,9 @@ export default {
             // })
             // .catch(()=>{ alert('통신 실패 ') })
         }
+    },
+    beforeMount() {
+        this.selected = localStorage.getItem('selected') ?? false;
     }
 
 }
