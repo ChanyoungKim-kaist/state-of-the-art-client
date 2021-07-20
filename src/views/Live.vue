@@ -4,11 +4,8 @@
       <v-container v-if="isNow" >
         <v-layout row>
           <v-flex xs12 text-center class="title ">
-                <!-- <h1> {{ArtInfo.title}} </h1> -->
                 <v-text class="artwork_title">Cleopatra Testing Poisons on Those Condemned to Death</v-text>
-                <v-text class="artwork_title">{{ArtInfo.engTitle}}</v-text>
-                <!-- <p> {{ArtInfo.context}}</p> -->
-                <v-text class="">Cleopatra Testing Poisons on Condemned Prisoners (Cléopâtre essayant des poisons sur des condamnés à mort) is an 1887 painting by the French artist Alexandre Cabanel. It is now in the Royal Museum of Fine Arts, Antwerp. It shows Cleopatra VII sitting at a banquet observing the effects of poisons on prisoners condemned to death. Cabanel had always had a taste for historical and orientalist themes and when the painting was first seen by the Parisian public he was feted by the critics and showered with honours. Several international collectors attempted to buy the painting.</v-text>
+                <!-- <v-text class="artwork_title">{{ArtInfo.engTitle}}</v-text> -->
             </v-flex>
           <v-col
             cols="12"
@@ -296,11 +293,13 @@
 <script>
 import axios from "axios"
 import { mapState } from "vuex"
+const connection = new WebSocket('ws://192.249.18.172:443')
 
 export default {
     mounted() {
         this.checkNow()
         this.checkisIn()
+        this.checkTime()
     },
     data() {
         return {
@@ -357,31 +356,18 @@ export default {
                 });
         },
         high(){ // 새로운 입찰가 
-            this.newprice = null
-            this.connection.send(JSON.stringify({
+            this.currentprice = this.newprice
+            
+            connection.send(JSON.stringify({
                 "price": this.newprice,
                 "user": this.userInfo.username
             }))
-            .then(res2=>{ 
-                this.currentprice = this.newprice,
-                this.timeline = res2.data.data.timeline
-                this.countDown = 15
-                this.countDownTimer()
-            })
-            .catch(()=>{ alert('경매에 실패했습니다.'), this.countDown = 15,this.countDownTimer() })
-
+            this.newprice = null
         },
+
         enterAuction() { //경매에 참여하기
             this.dialog = false
-            this.connection = new WebSocket('ws://192.249.18.172:443')
-
-            this.connection.onopen = function(Event){
-                console.log(Event)
-                console.log("Successfully connected to the auction")
-            }
-
             axios.get("http://192.249.18.172:80/start_bidding/productid/10/participate", this.config)
-
             .then(res3=>{ 
                 this.currentUsers = res3.data.currentUsers
                 localStorage.setItem("BidIn", true)
@@ -389,19 +375,35 @@ export default {
             })
             .catch(()=>{ alert('경매 참여에 실패했습니다.') })
         },
+        // countDownTimer() {
+        //     this.connection.onmessage = function(Event){
+        //         console.log(Event)
+        //     }
+        //     if(this.countDown > 0) {
+        //         setTimeout(()=> {
+        //             this.countDown -= 1
+        //             this.countDownTimer()
+        //         }, 1000)
+        //     } else {
+        //         alert( '경매가 종료되었습니다.')
 
-        countDownTimer() {
-            this.connection.onmessage = function(Event){
+        //     }
+        // }
+        checkTime() {
+            connection.onopen = function(Event){
                 console.log(Event)
+                console.log("Successfully connected to the auction")
             }
-            if(this.countDown > 0) {
-                setTimeout(()=> {
-                    this.countDown -= 1
-                    this.countDownTimer()
-                }, 1000)
-            } else {
-                alert( '경매가 종료되었습니다.')
 
+            connection.onmessage = function(Event){
+                // let parsed = JSON.parse(data);
+                // console.log(Event)
+                // this.timeline = Event.data.content.previousBids  
+                this.timeline= JSON.parse(Event.data).content.previousBids
+                this.timePassed = JSON.parse(Event.data).content.timePassed
+                this.countDown = 15 - this.timePassed
+                console.log(this.timeline, this.timePassed, this.countDown)
+                
             }
         }
     },
@@ -414,10 +416,10 @@ export default {
 </script>
 
 <style scoped>
-/* * {
-   cursor: url(../assets/c3.png), grab;
+* {
+   cursor: url(../assets/c4.png), grab;
 
-} */
+}
 
 @font-face {
     font-family: "AmalfiCoast";

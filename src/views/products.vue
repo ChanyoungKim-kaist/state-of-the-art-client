@@ -7,7 +7,6 @@
 <script>
 import ViewPort from "@/components/ViewPort.vue";
 //import ControlPanel from "@/components/ControlPanel.vue";
-
 export default {
   components: {
     viewport: ViewPort,
@@ -16,10 +15,11 @@ export default {
 };
 </script>
 
-<style>
-/* * {
+
+<style scoped>
+* {
    cursor: url(../assets/c2.png), grab;
-} */
+}
 
 html,
 body {

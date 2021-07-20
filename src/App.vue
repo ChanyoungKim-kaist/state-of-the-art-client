@@ -132,9 +132,6 @@
               </template>
             <span></span>
             </v-tooltip>
-
-            
-
             <!-- <v-btn text @click="logout">
               <span class="mr-2 fa-stack fa-1x">
                 <i class="fas fa-puzzle-piece"></i>
@@ -152,8 +149,6 @@
               </span>
               Artinfo
             </v-btn> -->
-            
-
           </v-col>
         </v-row>  
       </v-container>
@@ -161,7 +156,6 @@
     <v-main>
       <routerView/>
     </v-main>
-
     <v-navigation-drawer
       v-model="drawer"
       absolute
@@ -245,7 +239,6 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
 </v-app>
 </template>
 

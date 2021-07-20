@@ -225,10 +225,10 @@ export default {
 </script>
 
 <style scoped>
-/* * {
+* {
    cursor: url(../assets/c1.png), grab;
 
-} */
+}
 
 
 .startbtn{

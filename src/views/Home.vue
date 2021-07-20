@@ -1,5 +1,6 @@
 <template>
-    <div>
-        Hello
+    <div class="primary">
+         HelloHelloHelloHelloHelloHelloHelloHello
+         <v-btn> je </v-btn>
     </div>
 </template>
