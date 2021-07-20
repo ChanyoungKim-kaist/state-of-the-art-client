@@ -155,7 +155,12 @@ $(document).on('click','#cardTable td' ,function(){
             scorePlus()
             if(++openedCtn == 8){
                 alert('성공! \n'+score+'점 입니다!')
-                axios.post("", score, config)
+                this.token = localStorage.getItem("access_token")
+                this.config = {
+                        headers: {
+                            "token": this.token
+                        }}
+                axios.post("", score, this.config)
                     .then( res => {
                         if (!res.data.ok) {
                             alert ('점수 등록에 실패했습니다.')
@@ -207,12 +212,8 @@ function scoreMinus(){
 export default {
     data() {
         return {
-            token: localStorage.getItem("access_token"),
-            config: {
-                headers: {
-                    "token": this.token
-                }
-            },
+            token: null,
+            config: null,
         }
     },
     methods: {
