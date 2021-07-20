@@ -323,6 +323,7 @@ export default {
     },
     created: function() {
         this.connection = new WebSocket('ws://192.249.18.172:443')
+        this.isNow = localStorage.getItem("isNow")
     },
     methods: {
         checkisIn() {
@@ -333,6 +334,7 @@ export default {
                 .then(res2 => {
                 if (res2.data.ok) {
                     this.isNow = true
+                    localStorage.setItem("isNow", true)
                     let ArtInfo = {
                         currentprice : res2.data.data.currentprice,
                         engTitle : res2.data.data.engTitle,
@@ -341,7 +343,6 @@ export default {
                         context : res2.data.data.context,
                         id : res2.data.data.id
                     }
-                    this.currentUsers = res2.data.data.currentUsers
                     this.ArtInfo = ArtInfo
                     this.token = localStorage.getItem("access_token")
                     this.config = {
@@ -372,8 +373,9 @@ export default {
         enterAuction() { //경매에 참여하기
             this.dialog = false
             axios.get("http://192.249.18.172:80/start_bidding/productid/10/participate", this.config)
-            .then(()=>{ 
+            .then((res3)=>{ 
                 localStorage.setItem("BidIn", true)
+                this.currentUsers = res3.data.currentUsers
                 this.checkisIn()
             })
             .catch(()=>{ alert('경매 참여에 실패했습니다.') })
@@ -405,10 +407,12 @@ export default {
                 this.timeline= JSON.parse(Event.data).content.previousBids
                 this.currentprice = JSON.parse(Event.data).content.currentPrice
                 this.timePassed = JSON.parse(Event.data).content.timePassed
+                this.currentUsers = JSON.parse(Event.data).content.currentUsers
                 this.countDown = 15 - this.timePassed
                 console.log(this.timeline, this.timePassed, this.countDown)
                 if (this.countDown == 0) {
                     localStorage.setItem("BidIn", false) 
+                    localStorage.setItem("isNow", false)
                     this.isNow = false
                 }
              }

@@ -21,8 +21,8 @@ import {
   // Vector3,
   // Line
 } from "three-full";
-import { BoxGeometry, DoubleSide,  MeshLambertMaterial, 
-  MeshStandardMaterial, PlaneBufferGeometry, PointLight, TextureLoader } from 'three';
+import { BoxGeometry, DoubleSide, MeshLambertMaterial, 
+  MeshStandardMaterial, PlaneBufferGeometry, PointLight,  TextureLoader } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 Vue.use(Vuex)
@@ -139,7 +139,7 @@ export default new Vuex.Store({
         var material = new MeshStandardMaterial( {color: 0xffffff, map: texture});
         var mesh = new Mesh(geometry, material);
         //mesh.position.y = 2.5
-        mesh.position.setFromCylindricalCoords(random(15,40), random(-Math.PI * 2, Math.PI * 2), 2.5)
+        mesh.position.setFromCylindricalCoords(random(10,25), random(-Math.PI * 2, Math.PI * 2), 2.5)
         mesh.lookAt(0,2,0)
         state.scene.add(mesh);
       }
@@ -189,7 +189,7 @@ export default new Vuex.Store({
       // state.scene.add(lightB);
       // var lightC = new AmbientLight(0x222222);
       // state.scene.add(lightC);
-      var bg = require('./space.jpg')
+      var bg = require('../assets/moon.jpeg')
       var groundGeo = new PlaneBufferGeometry(105, 105)
       var groundTex = new TextureLoader().load(bg)
       var groundMat = new MeshLambertMaterial({side: DoubleSide, map: groundTex})
@@ -197,6 +197,21 @@ export default new Vuex.Store({
       var ground = new Mesh(groundGeo, groundMat)
       ground.rotation.x = -Math.PI / 2
       state.scene.add(ground)
+
+      // function addStar() {
+      //   var geometry = SphereGeometry(0.25, 24, 24);
+      //   var material = MeshStandardMaterial({ color: 0xffffff });
+      //   var star = Mesh(geometry, material);
+      
+      //   var [x, y, z] = Array(3)
+      //     .fill()
+      //     .map(() => MathUtils.randFloatSpread(100));
+      
+      //   star.position.set(x, y, z);
+      //   state.scene.add(star);
+      // }
+      
+      // Array(10).fill().forEach(addStar);
  
       // var gridHelper = new GridHelper(100,20)
       // state.scene.add(gridHelper)
