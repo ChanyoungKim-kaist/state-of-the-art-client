@@ -4,10 +4,10 @@
             <v-layout row mt-10>
                 <v-flex  text-xs-center row wrap align-center xs8>
                     <v-layout align-center justify-center column pa-5>
-                        <v-avatar height="200" width="200" class="mb-10">
+                        <v-item-avatar height="200" width="200" class="mb-10">
                             <!-- <img src="https://cdn.vuetifyjs.com/images/john.jpg"> -->
-                            <img v-bind:src="userInfo.avatar">
-                        </v-avatar>
+                            <v-img v-bind:src="userInfo.avatar" ></v-img>
+                        </v-item-avatar>
                         <v-flex text-center pt-5>
                             <h1> {{userInfo.username}}</h1>
                             <p> {{userInfo.username}} </p>
@@ -65,24 +65,30 @@ export default {
     data(){
         return {
             slides: [  
-                {src: require("../assets/pictures/pictures001.jpeg") },
-                {src: require("../assets/pictures/pictures002.jpeg") },
-                {src: require("../assets/pictures/pictures003.jpeg") },
-                {src: require("../assets/pictures/pictures004.jpeg") },
-                {src: require("../assets/pictures/pictures005.jpeg") },
-                {src: require("../assets/pictures/pictures006.jpeg") },
+                {src: require("../assets/pictures/pictures1.jpeg") },
+                {src: require("../assets/pictures/pictures2.jpeg") },
+                {src: require("../assets/pictures/pictures3.jpeg") },
+                {src: require("../assets/pictures/pictures4.jpeg") },
+                {src: require("../assets/pictures/pictures5.jpeg") },
+                {src: require("../assets/pictures/pictures6.jpeg") },
             ],
             wishlist: [
-                {src: require("../assets/pictures/pictures007.jpeg") },
-                {src: require("../assets/pictures/pictures008.jpeg") },
-                {src: require("../assets/pictures/pictures009.jpeg") },
-                {src: require("../assets/pictures/pictures010.jpeg") },
-            ]
+                {src: require("../assets/pictures/pictures7.jpeg") },
+                {src: require("../assets/pictures/pictures8.jpeg") },
+                {src: require("../assets/pictures/pictures9.jpeg") },
+                {src: require("../assets/pictures/pictures10.jpeg") },
+            ],
+            avatar: null
         }
     },
     computed: {
         ...mapState(["userInfo"])
-    }
+    },
+    // methods: {
+    //     getAvatar() {
+    //         this.avatar = "userInfo".avatar
+    //     }
+    // }
 }
 </script> 
 

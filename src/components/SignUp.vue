@@ -88,6 +88,9 @@
 
 <script>
 import { validationMixin } from 'vuelidate'
+import router from '../router/index'
+import { mapActions} from "vuex"
+import axios from "axios"
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 // import {mapState, mapActions} from "vuex"
   export default {
@@ -105,7 +108,6 @@ import { required, maxLength, email } from 'vuelidate/lib/validators'
     data: () => ({ 
       email: '',
       password: '',
-      phone: '',
       nickname: '',
       dialog: false,
       checkbox: false,
@@ -131,10 +133,23 @@ import { required, maxLength, email } from 'vuelidate/lib/validators'
       !this.$v.checkbox.checked && errors.push('You must agree to continue!')
       return errors
       },
-      // ...mapState(["isLogin", "isLoginError"])
     },
     methods: {
-      // ...mapActions(["login"]),
+      ...mapActions(["login"]),
+      register() {
+        var signObj = {
+          email : this.email,
+          password : this.password,
+          username : this.nickname
+        }
+        axios.post("", signObj)
+          .then(res=>{ 
+                if (res.data.ok) {
+                  router.push({name: "home"})
+                }
+            })
+            .catch(()=>{ alert('회원가입 통신 실패') })
+      }
     },
   }
 </script>

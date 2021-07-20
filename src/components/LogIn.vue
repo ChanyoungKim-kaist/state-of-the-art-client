@@ -33,7 +33,7 @@
           v-bind="attrs"
           v-on="on"
           >
-            ➔
+            --->
           </v-btn>
           </transition>
           

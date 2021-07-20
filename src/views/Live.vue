@@ -6,8 +6,9 @@
           <v-flex xs12 text-center class="title ">
                 <!-- <h1> {{ArtInfo.title}} </h1> -->
                 <v-text class="artwork_title">Cleopatra Testing Poisons on Those Condemned to Death</v-text>
+                <v-text class="artwork_title">{{ArtInfo.engTitle}}</v-text>
                 <!-- <p> {{ArtInfo.context}}</p> -->
-                <!-- <v-text class="">Cleopatra Testing Poisons on Condemned Prisoners (Cléopâtre essayant des poisons sur des condamnés à mort) is an 1887 painting by the French artist Alexandre Cabanel. It is now in the Royal Museum of Fine Arts, Antwerp. It shows Cleopatra VII sitting at a banquet observing the effects of poisons on prisoners condemned to death. Cabanel had always had a taste for historical and orientalist themes and when the painting was first seen by the Parisian public he was feted by the critics and showered with honours. Several international collectors attempted to buy the painting.</v-text> -->
+                <v-text class="">Cleopatra Testing Poisons on Condemned Prisoners (Cléopâtre essayant des poisons sur des condamnés à mort) is an 1887 painting by the French artist Alexandre Cabanel. It is now in the Royal Museum of Fine Arts, Antwerp. It shows Cleopatra VII sitting at a banquet observing the effects of poisons on prisoners condemned to death. Cabanel had always had a taste for historical and orientalist themes and when the painting was first seen by the Parisian public he was feted by the critics and showered with honours. Several international collectors attempted to buy the painting.</v-text>
             </v-flex>
           <v-col
             cols="12"
@@ -127,9 +128,13 @@
             </v-card>
 
             <v-card elevation="7" class="pa-10 mb-12">
-                <v-card-title class="justify-center exp_title ">사형수들에게 독약을 시험하는 클레오파트라</v-card-title>
+                <!-- <v-card-title class="justify-center exp_title ">사형수들에게 독약을 시험하는 클레오파트라</v-card-title>
                 <v-card-subtitle class="exp_subtitle text-center">알렉상드르 카바넬, 1887</v-card-subtitle>
-                <v-card-text class="exp_text text-center">Cleopatra Testing Poisons on Condemned Prisoners (Cléopâtre essayant des poisons sur des condamnés à mort) is an 1887 painting by the French artist Alexandre Cabanel. It is now in the Royal Museum of Fine Arts, Antwerp. It shows Cleopatra VII sitting at a banquet observing the effects of poisons on prisoners condemned to death. Cabanel had always had a taste for historical and orientalist themes and when the painting was first seen by the Parisian public he was feted by the critics and showered with honours. Several international collectors attempted to buy the painting.</v-card-text>
+                <v-card-text class="exp_text text-center">Cleopatra Testing Poisons on Condemned Prisoners (Cléopâtre essayant des poisons sur des condamnés à mort) is an 1887 painting by the French artist Alexandre Cabanel. It is now in the Royal Museum of Fine Arts, Antwerp. It shows Cleopatra VII sitting at a banquet observing the effects of poisons on prisoners condemned to death. Cabanel had always had a taste for historical and orientalist themes and when the painting was first seen by the Parisian public he was feted by the critics and showered with honours. Several international collectors attempted to buy the painting.</v-card-text> -->
+                <v-card-title class="justify-center exp_title "> {{ArtInfo.title}}  </v-card-title>
+                <v-card-subtitle class="exp_subtitle text-center">{{ArtInfo.subtitle}}</v-card-subtitle>
+                <v-card-text class="exp_text text-center">{{ArtInfo.content}}</v-card-text>
+            
             </v-card>
             </v-sheet>
           </v-col>
@@ -328,7 +333,9 @@ export default {
                     this.isNow = true
                     let ArtInfo = {
                         currentprice : res2.data.data.currentprice,
+                        engTitle : res2.data.data.engTitle,
                         title : res2.data.data.title,
+                        subtitle : res2.data.data.subtitle,
                         context : res2.data.data.context,
                         pictures : res2.data.data.pictures
                     }
@@ -350,6 +357,7 @@ export default {
                 });
         },
         high(){ // 새로운 입찰가 
+            this.newprice = null
             this.connection.send(JSON.stringify({
                 "price": this.newprice,
                 "user": this.userInfo.username
