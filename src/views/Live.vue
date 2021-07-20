@@ -3,7 +3,7 @@
     <v-main class="cyan darken-3 pt-10" >
       <v-container v-if="isNow" >
         <v-layout row>
-          <v-flex xs12 text-center class="title mb-n5">
+          <v-flex xs12 text-center class="title ">
                 <!-- <h1> {{ArtInfo.title}} </h1> -->
                 <v-text class="artwork_title">Cleopatra Testing Poisons on Those Condemned to Death</v-text>
                 <!-- <p> {{ArtInfo.context}}</p> -->
