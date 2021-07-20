@@ -349,8 +349,11 @@ export default {
                 });
         },
         high(){ // 새로운 입찰가 
-            this.newprice = null
-            axios.post("https://reqres.in/api/users/2", this.newprice, this.config)
+            this.connection.send(JSON.stringify({
+                "price": this.newprice,
+                "user": this.user
+
+            }))
             .then(res2=>{ 
                 this.currentprice = this.newprice,
                 this.timeline = res2.data.data.timeline
@@ -362,7 +365,12 @@ export default {
         },
         enterAuction() { //경매에 참여하기
             this.dialog = false
-            axios.get("http://192.249.18.172:80/start_bidding/productid/10/participate", this.config)
+            this.connection = new WebSocket('ws://192.249.18.172:443')
+
+            this.connection.onopen = function(Event){
+                console.log(Event)
+                console.log("Successfully connected to the auction")
+            }
             .then(res3=>{ 
                 this.currentUsers = res3.data.currentUsers
                 localStorage.setItem("BidIn", true)
@@ -370,7 +378,10 @@ export default {
             })
             .catch(()=>{ alert('경매 참여에 실패했습니다.') })
         },
-        countDownTimer() {
+        countDownTimer() {  
+            this.connection.onmessage = function(Event){
+                console.log(Event)
+            }
                 if(this.countDown > 0) {
                     setTimeout(()=> {
                         this.countDown -= 1
