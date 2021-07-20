@@ -10,7 +10,6 @@
           color="primary"
           block
           depressed
-          
           v-bind="attrs"
           v-on="on"
           width="300"

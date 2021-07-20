@@ -79,6 +79,11 @@
               </span>
               game
             </v-btn>
+            <v-btn text @click="logout">
+              <span class="mr-2 fa-stack fa-1x">
+                <i class="fas fa-puzzle-piece"></i>
+              </span>
+              logout </v-btn>
             <v-btn text router :to="{name: 'mypage'}">
               <span class="mr-2 fa-stack fa-1x">
                 <i class="fas fa-puzzle-piece"></i>
@@ -108,7 +113,7 @@
 </template>
 
 <script>
-import {mapState} from "vuex"
+import {mapState, mapActions} from "vuex"
 import Login from './components/LogIn.vue'
 //import Main from '../views/Main.vue'
 export default {
@@ -130,15 +135,20 @@ export default {
     },
     closeDialog(){
       this.dialog = false;
-    }
+    },
+    ...mapActions(["logout"])
   }
 };
 </script>
 
 <style scoped >
+* {
+   cursor: url(./assets/mouse-pointer-solid.png), grab;
+
+}
 
 .background {
-  background-color: rgb(236, 236, 236);
+  background-color: whitesmoke;
 
 }
 .title {
@@ -153,7 +163,7 @@ export default {
   font-size: 20px;
   text-transform: none !important;
   letter-spacing: -.008em;
-  color: #DB173F;
+  color: #F73100;
 }
   .v-btn{
     margin-inline-start: 10px;
@@ -164,4 +174,4 @@ export default {
   }
 </style>
 
-</style>
+
