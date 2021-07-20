@@ -56,7 +56,23 @@
                 </v-flex> 
             </v-layout>
         </v-flex>
+        <v-footer
+    padless
+    fixed
+    width="0"
+  >
+    <v-card
+      flat tile class="ma-10"
+    >
+        <v-btn @click="Play" fab class=" primary--text" elevation="3">
+            <span><i :class="isMarker"></i></span>
+        </v-btn>
+        <audio  id="audioval" src="https://server32.freeconvert.com/converted/20de39e1ea2e/mypage1.mp3"
+        autoplay loop></audio>
+    </v-card>
+</v-footer>
     </v-layout>
+    
 </template>
 
 <script>
@@ -78,12 +94,34 @@ export default {
                 {src: require("../assets/pictures/pictures9.jpeg") },
                 {src: require("../assets/pictures/pictures10.jpeg") },
             ],
-            avatar: null
+            avatar: null,
+            marker: true,
         }
     },
     computed: {
-        ...mapState(["userInfo"])
+        ...mapState(["userInfo"]),
+      isMarker(){
+            if (this.marker) {
+                return 'fas fa-volume-up'
+            }
+            else {
+                return 'fas fa-volume-mute'
+            }
+        },
     },
+    methods:{
+        Play()
+        {
+            var myAudio = document.getElementById("audioval");
+            this.marker = !this.marker;
+            if(myAudio.paused) {
+                myAudio.play();
+            }
+            else {
+            myAudio.pause();
+            }
+        },
+    }
     // methods: {
     //     getAvatar() {
     //         this.avatar = "userInfo".avatar

@@ -17,10 +17,6 @@
               height="400"
               style="overflow: auto"
             >
-                <audio controls>
-                    <source src="../assets/bgm/live1.m4a" autoplay type="audio/mp4">
-                    Your browser does not support the audio tag.
-                </audio>
               <v-list  v-for="(user, i) in currentUsers" two-line
                 :key="i">
                 <v-list-item>
@@ -291,6 +287,21 @@
             </v-flex>
             </v-layout>
       </v-container>
+<v-footer
+    padless
+    fixed
+    width="0"
+  >
+    <v-card
+      flat tile class="ma-10"
+    >
+        <v-btn @click="Play" fab class=" primary--text" elevation="3">
+            <span><i :class="isMarker"></i></span>
+        </v-btn>
+        <audio  id="audioval" src="https://storage.cloudconvert.com/tasks/1a5c33d0-b30e-4906-bae1-69f4a89268c1/live1.mp3?AWSAccessKeyId=cloudconvert-production&Expires=1626885909&Signature=jNcuobZVs5nPkp%2FDLQqsfFcuYDU%3D&response-content-disposition=inline%3B%20filename%3D%22live1.mp3%22&response-content-type=audio%2Fmpeg"
+        autoplay loop></audio>
+    </v-card>
+</v-footer>
     </v-main>
 </v-app>    
 </template>
@@ -299,6 +310,7 @@
 import axios from "axios"
 import { mapState } from "vuex"
 const connection = new WebSocket('ws://192.249.18.172:443')
+
 
 
 export default {
@@ -324,10 +336,22 @@ export default {
             config: null,
             isNow: true,
             ArtInfo: null,
-            fastTime: '0:0'
+            fastTime: '0:0',
+            marker: true
         }
     },
     methods: {
+        Play()
+        {
+            var myAudio = document.getElementById("audioval");
+            this.marker = !this.marker;
+            if(myAudio.paused) {
+                myAudio.play();
+            }
+            else {
+            myAudio.pause();
+            }
+        },
         checkisIn() {
             this.isIn = localStorage.getItem("BidIn")
         },
@@ -414,7 +438,15 @@ export default {
         }
     },
     computed: {
-      ...mapState(["userInfo"])
+      ...mapState(["userInfo"]),
+      isMarker(){
+            if (this.marker) {
+                return 'fas fa-volume-up'
+            }
+            else {
+                return 'fas fa-volume-mute'
+            }
+        },
     },
 
 }

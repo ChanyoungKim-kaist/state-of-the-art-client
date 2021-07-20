@@ -47,6 +47,21 @@
         </v-flex>
         </v-col>
     </v-row>
+<v-footer
+    padless
+    fixed
+    width="0"
+  >
+    <v-card
+      flat tile class="ma-10"
+    >
+        <v-btn @click="Play" fab class=" primary--text" elevation="3">
+            <span><i :class="isMarker"></i></span>
+        </v-btn>
+        <audio  id="audioval" src="https://www.zamzar.com/download.php?uid=6a846a41b61d224729e6fff7e6e15c38-7edc1b8b499b299f&targetId=A1rZfaiPm4_Y9pY_ZE_Zf5XPkpNjIxyhkM3&fileID=p1fb2fvrrdohmed513m0nva140q5.mp3"
+        autoplay loop></audio>
+    </v-card>
+</v-footer>
 </v-main>
 </v-app>
 </template>
@@ -210,9 +225,21 @@ export default {
         return {
             token: null,
             config: null,
+            marker: true,
         }
     },
     methods: {
+        Play()
+        {
+            var myAudio = document.getElementById("audioval");
+            this.marker = !this.marker;
+            if(myAudio.paused) {
+                myAudio.play();
+            }
+            else {
+            myAudio.pause();
+            }
+        },
         gameStart: function () {
         console.log('게임시작')
         if (gameState === '') {
@@ -220,7 +247,17 @@ export default {
             gameState = 'alreadyStart'
         }
         }
-    }
+    },
+    computed: {
+      isMarker(){
+            if (this.marker) {
+                return 'fas fa-volume-up'
+            }
+            else {
+                return 'fas fa-volume-mute'
+            }
+        },
+    },
 }
 </script>
 
