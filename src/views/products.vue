@@ -1,17 +1,61 @@
 <template>
   <div id="app">
     <viewport></viewport>
+    <v-footer
+        padless
+        fixed
+        width="0"
+      >
+        <v-card
+          flat tile class="ma-10"
+        >
+            <v-btn @click="Play" fab class=" primary--text" elevation="3">
+                <span><i :class="isMarker"></i></span>
+            </v-btn>
+            <audio  id="audioval" 
+            src="https://s160.convertio.me/p/49RuiHyiar_FebtnRWEahA/e39c29111934a716ab6550b590122613/Thankfulness_AdobeStock_331363115_preview.mp3"
+            autoplay loop></audio>
+        </v-card>
+    </v-footer>
   </div>
+  
 </template>
 
 <script>
 import ViewPort from "@/components/ViewPort.vue";
 //import ControlPanel from "@/components/ControlPanel.vue";
 export default {
+  data() {
+    return {marker: true}
+  },
   components: {
     viewport: ViewPort,
-    //panel: ControlPa,nel
+    // marker: true
+    //panel: ControlPanel
   },
+  methods: {
+    Play()
+        {
+            var myAudio = document.getElementById("audioval");
+            this.marker = !this.marker;
+            if(myAudio.paused) {
+                myAudio.play();
+            }
+            else {
+            myAudio.pause();
+            }
+        },
+  },
+  computed: {
+      isMarker(){
+            if (this.marker) {
+                return 'fas fa-volume-up'
+            }
+            else {
+                return 'fas fa-volume-mute'
+            }
+        },
+    },
 };
 </script>
 
