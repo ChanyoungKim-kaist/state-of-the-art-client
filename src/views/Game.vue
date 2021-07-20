@@ -160,7 +160,7 @@ $(document).on('click','#cardTable td' ,function(){
                         headers: {
                             "token": this.token
                         }}
-                axios.post("", score, this.config)
+                axios.post("http://192.249.18.172:80/game", score, this.config)
                     .then( res => {
                         if (!res.data.ok) {
                             alert ('점수 등록에 실패했습니다.')

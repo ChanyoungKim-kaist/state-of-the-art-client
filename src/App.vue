@@ -96,6 +96,12 @@
               </span>
               Artinfo
             </v-btn>
+            <v-btn text @click="$store.dispatch('logout')">
+              <span class="mr-2 fa-stack fa-1x">
+                <i class="fas fa-puzzle-piece"></i>
+              </span>
+              logout
+            </v-btn>
           </v-col>
         </v-row>  
       </v-container>

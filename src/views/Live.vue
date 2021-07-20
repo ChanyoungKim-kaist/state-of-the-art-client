@@ -290,6 +290,7 @@
 
 <script>
 import axios from "axios"
+import { mapState } from "vuex"
 
 export default {
     mounted() {
@@ -351,8 +352,7 @@ export default {
         high(){ // 새로운 입찰가 
             this.connection.send(JSON.stringify({
                 "price": this.newprice,
-                "user": this.user
-
+                "user": this.userInfo.username
             }))
             .then(res2=>{ 
                 this.currentprice = this.newprice,
@@ -371,6 +371,9 @@ export default {
                 console.log(Event)
                 console.log("Successfully connected to the auction")
             }
+
+            axios.get("http://192.249.18.172:80/start_bidding/productid/10/participate", this.config)
+
             .then(res3=>{ 
                 this.currentUsers = res3.data.currentUsers
                 localStorage.setItem("BidIn", true)
@@ -378,19 +381,24 @@ export default {
             })
             .catch(()=>{ alert('경매 참여에 실패했습니다.') })
         },
-        countDownTimer() {  
+
+        countDownTimer() {
             this.connection.onmessage = function(Event){
                 console.log(Event)
             }
-                if(this.countDown > 0) {
-                    setTimeout(()=> {
-                        this.countDown -= 1
-                        this.countDownTimer()
-                    }, 1000)
-                } else {
-                    alert( '경매가 종료되었습니다.')
-                }
+            if(this.countDown > 0) {
+                setTimeout(()=> {
+                    this.countDown -= 1
+                    this.countDownTimer()
+                }, 1000)
+            } else {
+                alert( '경매가 종료되었습니다.')
+
             }
+        }
+    },
+    computed: {
+      ...mapState(["userInfo"])
     },
 
 }

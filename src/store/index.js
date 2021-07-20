@@ -119,12 +119,12 @@ export default new Vuex.Store({
     INITIALIZE_SCENE(state) {
       state.scene = new Scene();
       var img = require('./space.jpg')
-      var img2 = require('../assets/b.png')
+      var img2 = require('../assets/pictures/pictures001.jpeg')
       state.scene.background = new TextureLoader().load(img);
       //state.scene.fog = new FogExp2(0xcccccc, 0.002);
 
       function addBox(image) {
-        var geometry = new BoxGeometry(5, 5, 0.2);
+        var geometry = new BoxGeometry(7, 5, 0.2);
         var texture = new TextureLoader().load(image)
         var material = new MeshStandardMaterial( {color: 0xffffff, map: texture});
         var mesh = new Mesh(geometry, material);
@@ -318,35 +318,57 @@ export default new Vuex.Store({
         });
     },
     logout({commit}){
+      let token = localStorage.getItem("access_token")
+      if (token !=null ) {
+        let config = {
+          headers : {
+            "token": token
+          }
+        }
       commit("logout")
       localStorage.clear()
-      router.push({name: "home"}) 
+      axios.post("http://192.249.18.172:80/logout", config)
+        .then(res2=>{
+          if (res2.data.ok) 
+            alert('로그아웃되었습니다.')
+            router.push({name: "home"}) 
+        })
+        .catch(()=>{ alert('통신 실패2') })
+  
+      }
     },
     getMemberInfo({commit}) {
       let token = localStorage.getItem("access_token")
-      let config = {
-        headers : {
-          "token": token
-        }
-      }
-      // 토큰 -> userinfo 반환
-      // 새로고침 -> 토큰만 가지고 userinfo 요청
-      axios.get("http://192.249.18.172:80/login/request_userinfo/", config)
-        .then(response=>{ 
-          if (response.data.ok) {
-            let userinfo = {
-              username : response.data.data.username,
-              avatar : response.data.data.avatar,
-              money : response.data.data.money,
-              wish : response.data.data.wish,
-              MyArt : response.data.data.MyArt
-            }
-            commit('loginSuccess', userinfo)
-            router.push({name: "main"}) 
+      if (token !=null ) {
+        let config = {
+          headers : {
+            "token": token
           }
-          else alert('이메일과 비밀번호를 확인하세요.')
-        })
-        .catch(()=>{ alert('이메일과 비밀번호를 확인하세요.') })
+        }
+        // 토큰 -> userinfo 반환
+        // 새로고침 -> 토큰만 가지고 userinfo 요청
+        axios.get("http://192.249.18.172:80/login/request_userinfo/", config)
+          .then(response=>{ 
+            if (response.data.ok) {
+              let userinfo = {
+                username : response.data.data.username,
+                avatar : response.data.data.avatar,
+                money : response.data.data.money,
+                wish : response.data.data.wish,
+                MyArt : response.data.data.MyArt
+              }
+              commit('loginSuccess', userinfo)
+              router.push({name: "home"}) 
+            } else {
+              alert('이메일과 비밀번호를 확인하세요.')
+              router.push({name: "home"}) 
+            }
+          })
+          .catch(()=>{ alert('통신 실패 ') })
+      }
+      else {
+        router.push({name: "home"}) 
+      }
     },
 
   },
