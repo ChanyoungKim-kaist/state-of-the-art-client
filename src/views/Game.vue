@@ -228,12 +228,18 @@ export default {
 </script>
 
 <style scoped>
+* {
+   cursor: url(../assets/c1.png), grab;
+
+}
+
 
 .startbtn{
     font-family: game;
     font-size: 30px;
     text-transform: uppercase;
     letter-spacing: -1px;
+    cursor: grab;
 }
 
 .gametext{
@@ -376,6 +382,7 @@ p span + span {
     font-size: 7rem;
   }
 }
+
 
 
 

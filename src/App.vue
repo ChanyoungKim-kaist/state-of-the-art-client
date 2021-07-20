@@ -128,6 +128,10 @@ export default {
 </script>
 
 <style scoped >
+* {
+   cursor: url(./assets/mouse-pointer-solid.png), grab;
+
+}
 
 .background {
   background-color: whitesmoke;
@@ -156,4 +160,4 @@ export default {
   }
 </style>
 
-</style>
+
