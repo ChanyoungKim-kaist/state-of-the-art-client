@@ -196,7 +196,7 @@
         </v-flex>
 
         <v-flex v-else xs12 text-center class="title">
-            <p class="firstprice mb-8"> {{ ArtInfo.currentprice }} NB  </p>
+            <p class="firstprice mb-8"> {{ currentprice }} NB  </p>
             <v-text-field 
                 reverse
                 v-if="isIn"
@@ -219,7 +219,6 @@
                 fab
                 height="100px"
                 width="100px"
-                
                 class="hand2"
                 color="yellow"
                 :ripple="false"
@@ -264,7 +263,7 @@
                     <v-row justify="space-between">
                         <v-col
                         cols="7"
-                        >{{event.username}}</v-col>
+                        >{{event.user_id}}</v-col>
                         <v-col
                         class="text-right userfont white--text"
                         cols="5"
@@ -293,9 +292,9 @@
 <script>
 import axios from "axios"
 import { mapState } from "vuex"
-const connection = new WebSocket('ws://192.249.18.172:443')
 
 export default {
+    
     mounted() {
         this.checkNow()
         this.checkisIn()
@@ -306,7 +305,7 @@ export default {
             isIn : false,
             change : false,
             currentUsers: [],
-            newprice: '',
+            newprice: 0,
             timerCount: 15,
             timerCount2: 59,
             countDown : 15,
@@ -318,8 +317,13 @@ export default {
             config: null,
             isNow: true,
             ArtInfo: null,
-            fastTime: '0:0'
+            fastTime: '0:0',
+            timePassed: 0,
+            connection: null,
         }
+    },
+    created: function() {
+        this.connection = new WebSocket('ws://192.249.18.172:443')
     },
     methods: {
         checkisIn() {
@@ -336,7 +340,7 @@ export default {
                         title : res2.data.data.title,
                         subtitle : res2.data.data.subtitle,
                         context : res2.data.data.context,
-                        pictures : res2.data.data.pictures
+                        id : res2.data.data.id
                     }
                     this.currentUsers = res2.data.data.currentUsers
                     this.ArtInfo = ArtInfo
@@ -356,13 +360,14 @@ export default {
                 });
         },
         high(){ // 새로운 입찰가 
+            this.change = true
             this.currentprice = this.newprice
-            
-            connection.send(JSON.stringify({
+            this.connection.send(JSON.stringify({
                 "price": this.newprice,
                 "user": this.userInfo.username
             }))
             this.newprice = null
+            
         },
 
         enterAuction() { //경매에 참여하기
@@ -390,20 +395,19 @@ export default {
         //     }
         // }
         checkTime() {
-            connection.onopen = function(Event){
+            this.connection.onopen = (Event) => {
                 console.log(Event)
                 console.log("Successfully connected to the auction")
             }
-
-            connection.onmessage = function(Event){
+            this.connection.onmessage = (Event) => {
                 // let parsed = JSON.parse(data);
                 // console.log(Event)
                 // this.timeline = Event.data.content.previousBids  
                 this.timeline= JSON.parse(Event.data).content.previousBids
+                this.currentprice = JSON.parse(Event.data).content.currentPrice
                 this.timePassed = JSON.parse(Event.data).content.timePassed
                 this.countDown = 15 - this.timePassed
                 console.log(this.timeline, this.timePassed, this.countDown)
-                
             }
         }
     },
