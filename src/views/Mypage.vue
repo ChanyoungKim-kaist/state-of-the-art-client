@@ -4,10 +4,9 @@
             <v-layout row mt-10>
                 <v-flex  text-xs-center row wrap align-center xs8>
                     <v-layout align-center justify-center column pa-5>
-                        <v-item-avatar height="200" width="200" class="mb-10">
-                            <!-- <img src="https://cdn.vuetifyjs.com/images/john.jpg"> -->
+                        <v-avatar height="200" width="200" class="mb-10">
                             <v-img v-bind:src="userInfo.avatar" ></v-img>
-                        </v-item-avatar>
+                        </v-avatar>
                         <v-flex text-center pt-5>
                             <h1> {{userInfo.username}}</h1>
                             <p> {{userInfo.username}} </p>
@@ -28,7 +27,7 @@
                                 show-arrows-on-hover
                             >
                                 <v-carousel-item 
-                                v-for="(slide, i) in slides"
+                                v-for="(slide, i) in collection"
                                 :key="i"
                                 :src="slide.src"
                                 >
@@ -62,21 +61,17 @@
 <script>
 import {mapState} from "vuex"
 export default {
+    mounted(){
+        this.getCollection()
+        this.getWish()
+    },
     data(){
         return {
-            slides: [  
-                {src: require("../assets/pictures/pictures1.jpeg") },
-                {src: require("../assets/pictures/pictures2.jpeg") },
-                {src: require("../assets/pictures/pictures3.jpeg") },
-                {src: require("../assets/pictures/pictures4.jpeg") },
-                {src: require("../assets/pictures/pictures5.jpeg") },
-                {src: require("../assets/pictures/pictures6.jpeg") },
+            collection: [  
+                
             ],
             wishlist: [
-                {src: require("../assets/pictures/pictures7.jpeg") },
-                {src: require("../assets/pictures/pictures8.jpeg") },
-                {src: require("../assets/pictures/pictures9.jpeg") },
-                {src: require("../assets/pictures/pictures10.jpeg") },
+                
             ],
             avatar: null
         }
@@ -84,11 +79,62 @@ export default {
     computed: {
         ...mapState(["userInfo"])
     },
-    // methods: {
-    //     getAvatar() {
-    //         this.avatar = "userInfo".avatar
-    //     }
-    // }
+    methods: {
+        getWish() {
+            for (var i=0; i<this.userInfo.wish.length; i++) {
+                var good = this.userInfo.wish[i].imagename
+                if(good ==0)
+                    this.wishlist.push({src: require("../assets/pictures/pictures0.jpeg")})
+                else if(good ==1)
+                    this.wishlist.push({src: require("../assets/pictures/pictures1.jpeg")})
+                else if(good ==2)
+                    this.wishlist.push({src: require("../assets/pictures/pictures2.jpeg")})
+                else if(good ==3)
+                    this.wishlist.push({src: require("../assets/pictures/pictures3.jpeg")})
+                else if(good ==4)
+                    this.wishlist.push({src: require("../assets/pictures/pictures4.jpeg")})
+                else if(good ==5)
+                    this.wishlist.push({src: require("../assets/pictures/pictures5.jpeg")})
+                else if(good ==6)
+                    this.wishlist.push({src: require("../assets/pictures/pictures6.jpeg")})
+                else if(good ==7)
+                    this.wishlist.push({src: require("../assets/pictures/pictures7.jpeg")})
+                else if(good ==8)
+                    this.wishlist.push({src: require("../assets/pictures/pictures8.jpeg")})
+                else if(good ==9)
+                    this.wishlist.push({src: require("../assets/pictures/pictures9.jpeg")})
+                else if(good ==10)
+                    this.wishlist.push({src: require("../assets/pictures/pictures10.jpeg")})
+            }
+        },
+        getCollection() {
+            for (var k=0; k<this.userInfo.MyArt.length; k++) {
+                var temp = this.userInfo.MyArt[k].imagename
+                if(temp==0)
+                    this.collection.push({src: require("../assets/pictures/pictures0.jpeg")})
+                else if(temp ==1)
+                    this.collection.push({src: require("../assets/pictures/pictures1.jpeg")})
+                else if(temp ==2)
+                    this.collection.push({src: require("../assets/pictures/pictures2.jpeg")})
+                else if(temp ==3)
+                    this.collection.push({src: require("../assets/pictures/pictures3.jpeg")})
+                else if(temp ==4)
+                    this.collection.push({src: require("../assets/pictures/pictures4.jpeg")})
+                else if(temp ==5)
+                    this.collection.push({src: require("../assets/pictures/pictures5.jpeg")})
+                else if(temp ==6)
+                    this.collection.push({src: require("../assets/pictures/pictures6.jpeg")})
+                else if(temp ==7)
+                    this.collection.push({src: require("../assets/pictures/pictures7.jpeg")})
+                else if(temp ==8)
+                    this.collection.push({src: require("../assets/pictures/pictures8.jpeg")})
+                else if(temp ==9)
+                    this.collection.push({src: require("../assets/pictures/pictures9.jpeg")})
+                else if(temp ==10)
+                    this.collection.push({src: require("../assets/pictures/pictures10.jpeg")})
+            }
+        }
+    }
 }
 </script> 
 

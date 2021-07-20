@@ -4,8 +4,8 @@
       <v-container v-if="isNow" >
         <v-layout row>
           <v-flex xs12 text-center class="title ">
-                <v-text class="artwork_title">Cleopatra Testing Poisons on Those Condemned to Death</v-text>
-                <!-- <v-text class="artwork_title">{{ArtInfo.engTitle}}</v-text> -->
+                <!-- <v-text class="artwork_title">Cleopatra Testing Poisons on Those Condemned to Death</v-text> -->
+                <v-text class="artwork_title">{{ ArtInfo.engTitle }}</v-text>
             </v-flex>
           <v-col
             cols="12"
@@ -120,7 +120,7 @@
 
             <v-card elevation="9" tile class="mb-7">
                 <v-img
-                src="../assets/cleopatra.jpg">
+                :src="picture">
                 </v-img>
             </v-card>
 
@@ -130,7 +130,7 @@
                 <v-card-text class="exp_text text-center">Cleopatra Testing Poisons on Condemned Prisoners (Cléopâtre essayant des poisons sur des condamnés à mort) is an 1887 painting by the French artist Alexandre Cabanel. It is now in the Royal Museum of Fine Arts, Antwerp. It shows Cleopatra VII sitting at a banquet observing the effects of poisons on prisoners condemned to death. Cabanel had always had a taste for historical and orientalist themes and when the painting was first seen by the Parisian public he was feted by the critics and showered with honours. Several international collectors attempted to buy the painting.</v-card-text> -->
                 <v-card-title class="justify-center exp_title "> {{ArtInfo.title}}  </v-card-title>
                 <v-card-subtitle class="exp_subtitle text-center">{{ArtInfo.subtitle}}</v-card-subtitle>
-                <v-card-text class="exp_text text-center">{{ArtInfo.content}}</v-card-text>
+                <v-card-text class="exp_text text-center">{{ArtInfo.context}}</v-card-text>
             
             </v-card>
             </v-sheet>
@@ -277,6 +277,15 @@
         </v-layout>
       </v-container>
 
+      <v-container v-else-if="isFinish">
+          <v-layout justify-center align-center style="height: 700px">
+          <v-flex xs12 text-center class="title">
+                <h1> 축하합니다! 입찰에 성공했습니다. 🎉 </h1>
+                <v-text> 해당 작품은 마이페이지에서 확인하실 수 있습니다. </v-text>
+            </v-flex>
+            </v-layout>
+      </v-container>
+
       <v-container v-else>
           <v-layout justify-center align-center style="height: 700px">
           <v-flex xs12 text-center class="title">
@@ -301,6 +310,7 @@ export default {
     },
     data() {
         return {
+            isFinish: false,
             isIn : false,
             change : false,
             currentUsers: [],
@@ -314,16 +324,16 @@ export default {
             currentprice: null,
             token: null,
             config: null,
-            isNow: true,
+            isNow: false,
             ArtInfo: null,
-            fastTime: '0:0',
+            fastTime: null,
             timePassed: 0,
             connection: null,
+            picture: null
         }
     },
     created: function() {
         this.connection = new WebSocket('ws://192.249.18.172:443')
-        this.isNow = localStorage.getItem("isNow")
     },
     methods: {
         checkisIn() {
@@ -333,17 +343,52 @@ export default {
             axios.get("http://192.249.18.172:80/start_bidding/productid/10")
                 .then(res2 => {
                 if (res2.data.ok) {
-                    this.isNow = true
-                    localStorage.setItem("isNow", true)
-                    let ArtInfo = {
+                    let artInfo = {
                         currentprice : res2.data.data.currentprice,
                         engTitle : res2.data.data.engTitle,
                         title : res2.data.data.title,
                         subtitle : res2.data.data.subtitle,
                         context : res2.data.data.context,
-                        id : res2.data.data.id
+                        src: res2.data.data.src,
+                        id: res2.data.data.id
                     }
-                    this.ArtInfo = ArtInfo
+                    this.ArtInfo = artInfo
+                    
+                    if (artInfo.id == 0) {
+                        this.picture = require("../assets/origin/origin0.jpeg")
+                    }
+                    else if (artInfo.id == 1) {
+                        this.picture = require("../assets/origin/origin1.jpeg")
+                    }
+                    else if (artInfo.id == 2) {
+                        this.picture = require("../assets/origin/origin2.jpeg")
+                    }
+                    else if (artInfo.id == 3) {
+                        this.picture = require("../assets/origin/origin3.jpeg")
+                    }
+                    else if (artInfo.id == 4) {
+                        this.picture = require("../assets/origin/origin4.jpeg")
+                    }
+                    else if (artInfo.id == 5) {
+                        this.picture = require("../assets/origin/origin5.jpeg")
+                    }
+                    else if (artInfo.id == 6) {
+                        this.picture = require("../assets/origin/origin6.jpeg")
+                    }
+                    else if (artInfo.id == 7) {
+                        this.picture = require("../assets/origin/origin7.jpeg")
+                    }
+                    else if (artInfo.id == 8) {
+                        this.picture = require("../assets/origin/origin8.jpeg")
+                    }
+                    else if (artInfo.id == 9) {
+                        this.picture = require("../assets/origin/origin9.jpeg")
+                    }
+                    else if (artInfo.id == 10) {
+                        this.picture = require("../assets/origin/origin10.jpeg")
+                    }
+
+                    this.currentUsers = res2.data.currentUsers
                     this.token = localStorage.getItem("access_token")
                     this.config = {
                             headers: {
@@ -351,8 +396,9 @@ export default {
                             }
                     },
                     console.log(this.token)
+                    this.isNow=true
                 } else {
-                    this.fastTime = res2.data.fasttime
+                    this.fastTime = res2.data.date
                 }
                 })
                 .catch(() => {
@@ -407,12 +453,11 @@ export default {
                 this.timeline= JSON.parse(Event.data).content.previousBids
                 this.currentprice = JSON.parse(Event.data).content.currentPrice
                 this.timePassed = JSON.parse(Event.data).content.timePassed
-                this.currentUsers = JSON.parse(Event.data).content.currentUsers
+                this.currentUsers = JSON.parse(Event.data).content.currentUsers.bidding_participants
                 this.countDown = 15 - this.timePassed
                 console.log(this.timeline, this.timePassed, this.countDown)
                 if (this.countDown == 0) {
                     localStorage.setItem("BidIn", false) 
-                    localStorage.setItem("isNow", false)
                     this.isNow = false
                 }
              }
