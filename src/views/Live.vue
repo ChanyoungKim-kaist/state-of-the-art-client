@@ -370,7 +370,7 @@ export default {
             this.isIn = localStorage.getItem("BidIn")
         },
         checkNow() {
-            axios.get("http://192.249.18.172:80/start_bidding/productid/10")
+            axios.get("http://192.249.18.172:80/start_bidding/productid/9")
                 .then(res2 => {
                 if (res2.data.ok) {
                     let artInfo = {

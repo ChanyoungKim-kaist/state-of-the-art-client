@@ -11,9 +11,11 @@
                             <v-img v-bind:src="userInfo.avatar" ></v-img>
                         </v-avatar>
                         <v-flex text-center>
-                            <v-text class="money primary--text">Have a nice day, {{userInfo.username}}</v-text>
+                            <v-text class="money primary--text">Have a nice day,</v-text>
+                            <v-text class="money">{{userInfo.username}}</v-text>
                             <p></p>
-                            <v-text class="money primary--text"> You've got {{userInfo.money}} </v-text>
+                            <v-text class="money primary--text"> You've got  </v-text>
+                            <v-text class="money"> {{userInfo.money}} </v-text>
                             <v-text class="money primary--text"> NB </v-text>
                         </v-flex>
                     </v-layout>
@@ -28,7 +30,7 @@
                             <v-text class="gallery primary--text">My Collection</v-text>
                             <v-carousel
                                 cycle
-                                height="260"
+                                height="auto"
                                 hide-delimiters
                                 show-arrows-on-hover
                             >
@@ -45,7 +47,7 @@
                                 <v-text class="gallery primary--text"> Wish List </v-text>
                             <v-carousel
                                 cycle
-                                height="260"
+                                height="auto"
                                 hide-delimiters
                                 show-arrows-on-hover
                             >
@@ -71,7 +73,7 @@
         <v-btn @click="Play" fab class=" primary--text" elevation="3">
             <span><i :class="isMarker"></i></span>
         </v-btn>
-        <audio  id="audioval" src="https://server32.freeconvert.com/converted/20de39e1ea2e/mypage1.mp3"
+        <audio  id="audioval" src="https://storage.cloudconvert.com/tasks/0c8ea51a-2591-4217-96d5-869b8b97fa19/mypage.mp3?AWSAccessKeyId=cloudconvert-production&Expires=1626906819&Signature=ZCN1kmEVV7hYe%2BU2LuK6cDWwKfA%3D&response-content-disposition=inline%3B%20filename%3D%22mypage.mp3%22&response-content-type=audio%2Fmpeg"
         autoplay loop></audio>
     </v-card>
 </v-footer>
