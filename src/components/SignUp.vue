@@ -89,7 +89,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import router from '../router/index'
-import { mapActions} from "vuex"
+// import { mapActions} from "vuex"
 import axios from "axios"
 import { required, maxLength, email } from 'vuelidate/lib/validators'
 // import {mapState, mapActions} from "vuex"
@@ -135,7 +135,7 @@ import { required, maxLength, email } from 'vuelidate/lib/validators'
       },
     },
     methods: {
-      ...mapActions(["login"]),
+      // ...mapActions(["login"]),
       register() {
         var signObj = {
           email : this.email,

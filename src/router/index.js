@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from "../store/index"
+// import store from "../store/index"
 
 Vue.use(VueRouter)
 
@@ -14,14 +14,14 @@ Vue.use(VueRouter)
 //   }
 // }
 
-const onlyAuthUser = (to, from, next) => {
-  if (store.state.isLogin == false) {
-    alert('로그인을 해야합니다.')
-    next('/')
-  } else {
-    next()
-  }
-}
+// const onlyAuthUser = (to, from, next) => {
+//   if (store.state.isLogin == false) {
+//     alert('로그인을 해야합니다.')
+//     next('/')
+//   } else {
+//     next()
+//   }
+// }
 
 const routes = [
   {
@@ -32,21 +32,19 @@ const routes = [
   {
     path: '/mypage', 
     name: 'mypage',
-    beforeEnter: onlyAuthUser,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Mypage.vue')
   },
-  {
-    path: '/upload', 
-    name: 'upload',
-    beforeEnter: onlyAuthUser,
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Upload.vue')
-  },
+  // {
+  //   path: '/upload', 
+  //   name: 'upload',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/Upload.vue')
+  // },
   {
     path: '/live', 
     name: 'live',

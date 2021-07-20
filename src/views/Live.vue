@@ -294,7 +294,6 @@ import axios from "axios"
 import { mapState } from "vuex"
 
 export default {
-    
     mounted() {
         this.checkNow()
         this.checkisIn()
@@ -305,14 +304,14 @@ export default {
             isIn : false,
             change : false,
             currentUsers: [],
-            newprice: 0,
+            newprice: null,
             timerCount: 15,
             timerCount2: 59,
             countDown : 15,
-            timeline: [{username: 'nayeon', price:100}, {username: 'nayeon', price:100}, {username: 'nayeon', price:100}],
+            timeline: [],
             fasttime: '3:30',
             dialog: false,
-            currentprice: 0,
+            currentprice: null,
             token: null,
             config: null,
             isNow: true,
@@ -373,8 +372,7 @@ export default {
         enterAuction() { //경매에 참여하기
             this.dialog = false
             axios.get("http://192.249.18.172:80/start_bidding/productid/10/participate", this.config)
-            .then(res3=>{ 
-                this.currentUsers = res3.data.currentUsers
+            .then(()=>{ 
                 localStorage.setItem("BidIn", true)
                 this.checkisIn()
             })
@@ -403,12 +401,17 @@ export default {
                 // let parsed = JSON.parse(data);
                 // console.log(Event)
                 // this.timeline = Event.data.content.previousBids  
+                this.change = true
                 this.timeline= JSON.parse(Event.data).content.previousBids
                 this.currentprice = JSON.parse(Event.data).content.currentPrice
                 this.timePassed = JSON.parse(Event.data).content.timePassed
                 this.countDown = 15 - this.timePassed
                 console.log(this.timeline, this.timePassed, this.countDown)
-            }
+                if (this.countDown == 0) {
+                    localStorage.setItem("BidIn", false) 
+                    this.isNow = false
+                }
+             }
         }
     },
     computed: {

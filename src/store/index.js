@@ -325,13 +325,13 @@ export default new Vuex.Store({
             "token": token
           }
         }
-      commit("logout")
-      localStorage.clear()
       axios.post("http://192.249.18.172:80/logout", config)
         .then(res2=>{
           if (res2.data.ok) 
             alert('로그아웃되었습니다.')
-            router.push({name: "home"}) 
+            commit("logout")
+            localStorage.clear()
+            router.push({name: "home"})  
         })
         .catch(()=>{ alert('로그아웃 통신 실패') })
   

@@ -10,10 +10,12 @@ import ViewPort from "@/components/ViewPort.vue";
 export default {
   components: {
     viewport: ViewPort,
-    //panel: ControlPanel
-  }
+    //panel: ControlPa,nel
+  },
 };
 </script>
+
+
 
 
 <style scoped>
