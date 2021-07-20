@@ -136,13 +136,13 @@ export default {
                         "token": this.token
                     }
             }
-            // axios.post("", data, this.config)
-            // .then(res=>{ 
-            //     if (res.data.ok) {
-            //         alert('위시리스트가 수정되었습니다.')
-            //     }
-            // })
-            // .catch(()=>{ alert('통신 실패 ') })
+            axios.post("http://192.249.18.172:80/wishlist", data, this.config)
+            .then(res=>{ 
+                if (res.data.ok) {
+                    alert('위시리스트가 수정되었습니다.')
+                }
+            })
+            .catch(()=>{ alert('통신 실패 ') })
         }
     },
     beforeMount() {

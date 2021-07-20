@@ -318,9 +318,24 @@ export default new Vuex.Store({
         });
     },
     logout({commit}){
+      let token = localStorage.getItem("access_token")
+      if (token !=null ) {
+        let config = {
+          headers : {
+            "token": token
+          }
+        }
       commit("logout")
       localStorage.clear()
-      router.push({name: "home"}) 
+      axios.post("http://192.249.18.172:80/logout", config)
+        .then(res2=>{
+          if (res2.data.ok) 
+            alert('로그아웃되었습니다.')
+            router.push({name: "home"}) 
+        })
+        .catch(()=>{ alert('통신 실패2') })
+  
+      }
     },
     getMemberInfo({commit}) {
       let token = localStorage.getItem("access_token")

@@ -5,8 +5,8 @@
                 <v-flex  text-xs-center row wrap align-center xs8>
                     <v-layout align-center justify-center column pa-5>
                         <v-avatar height="200" width="200" class="mb-10">
-                            <img src="https://cdn.vuetifyjs.com/images/john.jpg">
-                            <!-- <img v-bind:src="userInfo.avatar"> -->
+                            <!-- <img src="https://cdn.vuetifyjs.com/images/john.jpg"> -->
+                            <img v-bind:src="userInfo.avatar">
                         </v-avatar>
                         <v-flex text-center pt-5>
                             <h1> {{userInfo.username}}</h1>
