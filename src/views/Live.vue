@@ -220,7 +220,7 @@ export default {
             fasttime: '3:30',
             dialog: false,
             currentprice: 0,
-            token: 0,
+            token: null,
             config: null,
             isNow: true,
             ArtInfo: null,

@@ -6,7 +6,6 @@
             <p> 미니게임을 통해 머니를 획득할 수 있어요! </p>
         </v-flex>
 
-        
         <v-flex xs12 text-center class="title2">
             <v-btn block @click="gameStart">GameStart</v-btn>
             <h1> score : <span id='score'>0</span></h1>
@@ -121,7 +120,12 @@ $(document).on('click','#cardTable td' ,function(){
             scorePlus()
             if(++openedCtn == 8){
                 alert('성공! \n'+score+'점 입니다!')
-                axios.post("", score, config)
+                this.token = localStorage.getItem("access_token")
+                this.config = {
+                        headers: {
+                            "token": this.token
+                        }}
+                axios.post("", score, this.config)
                     .then( res => {
                         if (!res.data.ok) {
                             alert ('점수 등록에 실패했습니다.')
@@ -173,12 +177,8 @@ function scoreMinus(){
 export default {
     data() {
         return {
-            token: localStorage.getItem("access_token"),
-            config: {
-                headers: {
-                    "token": this.token
-                }
-            },
+            token: null,
+            config: null,
         }
     },
     methods: {

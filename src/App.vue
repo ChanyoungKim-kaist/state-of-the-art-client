@@ -28,7 +28,6 @@
         <v-btn
           class="fontbtn ml-10 mr-10" width="200 "
           text
-
         >
           미술관 둘러보기
         </v-btn>
@@ -80,9 +79,19 @@
               </span>
               game
             </v-btn>
+            <v-btn text router :to="{name: 'mypage'}">
+              <span class="mr-2 fa-stack fa-1x">
+                <i class="fas fa-puzzle-piece"></i>
+              </span>
+              mypage
+            </v-btn>
+            <v-btn text router :to="{name: 'artinfo'}">
+              <span class="mr-2 fa-stack fa-1x">
+                <i class="fas fa-puzzle-piece"></i>
+              </span>
+              Artinfo
+            </v-btn>
           </v-col>
-
-          
         </v-row>  
       </v-container>
     </v-app-bar>

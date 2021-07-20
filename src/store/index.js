@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router/index'
 import axios from "axios"
+import createPersistedState from 'vuex-persistedstate';
 
 import {
   Scene,
@@ -318,7 +319,7 @@ export default new Vuex.Store({
     },
     logout({commit}){
       commit("logout")
-      localStorage.removeItem('access_token')
+      localStorage.clear()
       router.push({name: "home"}) 
     },
     getMemberInfo({commit}) {
@@ -350,6 +351,9 @@ export default new Vuex.Store({
 
   },
   modules: {
-  }
+  },
+  plugins: [
+    createPersistedState()
+  ]
 
 })
