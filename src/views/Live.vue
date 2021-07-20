@@ -4,6 +4,7 @@
       <v-container v-if="isNow" >
         <v-layout row>
           <v-flex xs12 text-center class="title ">
+
                 <v-text class="artwork_title">Cleopatra Testing Poisons on Those Condemned to Death</v-text>
                 <!-- <v-text class="artwork_title">{{ArtInfo.engTitle}}</v-text> -->
             </v-flex>
@@ -16,6 +17,10 @@
               height="400"
               style="overflow: auto"
             >
+                <audio controls>
+                    <source src="../assets/bgm/live1.m4a" autoplay type="audio/mp4">
+                    Your browser does not support the audio tag.
+                </audio>
               <v-list  v-for="(user, i) in currentUsers" two-line
                 :key="i">
                 <v-list-item>
@@ -294,6 +299,7 @@
 import axios from "axios"
 import { mapState } from "vuex"
 const connection = new WebSocket('ws://192.249.18.172:443')
+
 
 export default {
     mounted() {
