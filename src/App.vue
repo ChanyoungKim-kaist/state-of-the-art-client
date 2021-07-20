@@ -61,25 +61,81 @@
           </v-col>
           
           <v-col align="end">
-            <v-btn text router :to="{name: 'products'}">
-              <span class="mr-2 fa-stack fa-1x">
-                <i class="fas fa-palette"></i>
-              </span>
-              Museum
-            </v-btn>
-            <v-btn text router :to="{name: 'live'}">
-              <span class="mr-2 fa-stack fa-1x">
-                <i class="fas fa-gavel"></i>
-              </span>
-              Auction
-            </v-btn>
-            <v-btn text router :to="{name: 'game'}">
-              <span class="mr-2 fa-stack fa-1x">
-                <i class="fas fa-puzzle-piece"></i>
-              </span>
-              game
-            </v-btn>
-            <v-btn text @click="logout">
+            <v-tooltip bottom content-class="tooltipfont mucolor" transition="scroll-y-transition">
+              <template v-slot:activator="{on, attrs}">
+                <v-hover v-slot="{hover}">
+                <v-btn  v-if="hover" router :to="{name: 'products'}" v-bind="attrs" v-on="on" fab class="mucolor white--text" elevation="3">
+                  <span>
+                    <i class="fas fa-palette rotate"></i>
+                  </span>
+                </v-btn>
+                <v-btn  v-else router :to="{name: 'products'}" v-bind="attrs" v-on="on" fab class="white mucolor--text" elevation="3">
+                  <span>
+                    <i class="fas fa-palette"></i>
+                  </span>
+                </v-btn>
+                </v-hover>
+            </template>
+            <span> museum </span>
+            </v-tooltip>
+
+            <v-tooltip bottom content-class="tooltipfont aucolor" transition="scroll-y-transition">
+              <template v-slot:activator="{on, attrs}">
+                <v-hover v-slot="{hover}">
+                <v-btn  v-if="hover" router :to="{name: 'live'}" v-bind="attrs" v-on="on" fab class="aucolor white--text" elevation="3">
+                  <span>
+                    <i class="fas fa-gavel rotate"></i>
+                  </span>
+                </v-btn>
+                <v-btn  v-else router :to="{name: 'live'}" v-bind="attrs" v-on="on" fab class="white aucolor--text" elevation="3">
+                  <span>
+                    <i class="fas fa-gavel"></i>
+                  </span>
+                </v-btn>
+                </v-hover>
+            </template>
+            <span> auction </span>
+            </v-tooltip>
+
+            <v-tooltip bottom content-class="tooltipfont gamecolor" transition="scroll-y-transition">
+              <template v-slot:activator="{on, attrs}">
+                <v-hover v-slot="{hover}">
+                <v-btn  v-if="hover" router :to="{name: 'game'}" v-bind="attrs" v-on="on" fab class="gamecolor white--text" elevation="3">
+                  <span>
+                    <i class="fas fa-puzzle-piece rotate"></i>
+                  </span>
+                </v-btn>
+                <v-btn  v-else router :to="{name: 'game'}" v-bind="attrs" v-on="on" fab class="white gamecolor--text" elevation="3">
+                  <span>
+                    <i class="fas fa-puzzle-piece"></i>
+                  </span>
+                </v-btn>
+                </v-hover>
+            </template>
+            <span> game </span>
+            </v-tooltip>
+
+            <v-tooltip bottom content-class="tooltipfont transparent" transition="scroll-y-transition">
+              <template v-slot:activator="{on, attrs}">
+                <v-hover v-slot="{hover}">
+                <v-btn  v-if="hover" @click.stop="drawer=!drawer" v-bind="attrs" v-on="on" fab class="primary white--text" elevation="3">
+                  <span>
+                    <i class="fas fa-bars rotate"></i>
+                  </span>
+                </v-btn>
+                <v-btn  v-else router :to="{name: 'game'}" v-bind="attrs" v-on="on" fab class="white primary--text" elevation="3">
+                  <span>
+                    <i class="fas fa-bars"></i>
+                  </span>
+                </v-btn>
+                </v-hover>
+              </template>
+            <span></span>
+            </v-tooltip>
+
+            
+
+            <!-- <v-btn text @click="logout">
               <span class="mr-2 fa-stack fa-1x">
                 <i class="fas fa-puzzle-piece"></i>
               </span>
@@ -95,13 +151,9 @@
                 <i class="fas fa-puzzle-piece"></i>
               </span>
               Artinfo
-            </v-btn>
-            <v-btn text @click="$store.dispatch('logout')">
-              <span class="mr-2 fa-stack fa-1x">
-                <i class="fas fa-puzzle-piece"></i>
-              </span>
-              logout
-            </v-btn>
+            </v-btn> -->
+            
+
           </v-col>
         </v-row>  
       </v-container>
@@ -109,6 +161,91 @@
     <v-main>
       <routerView/>
     </v-main>
+
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+      right
+      :width="300"
+    >
+      <v-list>
+        <v-list-item>
+          <v-hover>
+            <v-img
+              transition="scale-transition"
+              slot-scope="{hover}"
+              v-if="hover"
+              src="./assets/main_1.svg"
+              contain
+              class="title"
+            ></v-img>
+            <v-img
+              v-else
+              src="./assets/main_2.svg"
+              contain
+              class="title"
+            ></v-img>
+          </v-hover>
+        </v-list-item>
+        <v-list-item>
+          <v-hover>
+            <v-img
+              transition="scale-transition"
+              slot-scope="{hover}"
+              v-if="hover"
+              src="./assets/main_2.svg"
+              contain
+              class="title"
+            ></v-img>
+            <v-img
+              v-else
+              src="./assets/main_1.svg"
+              contain
+              class="title"
+            ></v-img>
+          </v-hover>
+        </v-list-item>
+        <v-list-item>
+          <v-hover>
+            <v-img
+              transition="scale-transition"
+              slot-scope="{hover}"
+              v-if="hover"
+              src="./assets/main_1.svg"
+              contain
+              class="title"
+            ></v-img>
+            <v-img
+              v-else
+              src="./assets/main_2.svg"
+              contain
+              class="title"
+            ></v-img>
+          </v-hover>
+        </v-list-item>
+        <v-list-item></v-list-item>
+        
+        <v-list-item link router :to="{name: 'mypage'}">
+          <v-list-item-content>
+            <v-list-item-title class="fontbtn">My page</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link router :to="{name: 'artinfo'}">
+          <v-list-item-content>
+            <v-list-item-title class="fontbtn">Art info</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link @click="logout">
+          <v-list-item-content>
+            <v-list-item-title class="fontbtn">Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
 </v-app>
 </template>
 
@@ -125,6 +262,11 @@ export default {
 
   data: () => ({
     dialog: false,
+    drawer: null,
+    items: [
+      { title: 'Home', icon: 'mdi-view-dashboard' },
+      { title: 'About', icon: 'mdi-forum' },
+    ],
   }),
   computed:{
     ...mapState(["isLogin"])
@@ -165,13 +307,27 @@ export default {
   letter-spacing: -.008em;
   color: #F73100;
 }
-  .v-btn{
-    margin-inline-start: 10px;
-    margin-inline-end: 10px;
-    font-family: raleway, sans-serif;
-    font-weight: 500;
-    font-style: normal;
-  }
+.v-btn{
+  margin-inline-start: 10px;
+  margin-inline-end: 10px;
+  font-family: raleway, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.rotate{
+    transform: rotate(360deg);
+    transition: all 0.3s ease-in-out;
+}
+.tooltipfont{
+  font-family: raleway, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  text-transform: uppercase !important;
+  letter-spacing: -.008em;
+  color: #ffffff;
+  
+}
 </style>
 
 
