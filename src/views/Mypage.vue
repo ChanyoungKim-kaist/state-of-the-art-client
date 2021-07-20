@@ -1,34 +1,34 @@
 <template>
-<v-app fill-height >
-    <v-main class="yellow">
-        <v-container fluid>
-            <v-layout row>
-                <v-col cols="12" sm="6" >
-                    <v-flex class="primary">
-                    <v-layout align-center justify-center column pa-5>
-                        <v-item-avatar height="200" width="200" class="mb-10">
+<v-app fill height >
+    <v-content >
+        <v-container fluid class="fill-height bg">
+            <v-row fill-height>
+                <v-col cols="12" sm="6" class="bg">
+                    <v-flex>
+                    <v-layout align-center justify-center column pa-5 mt-10>
+                        <v-item-avatar height="200" width="200" class="ma-10">
                             <!-- <img src="https://cdn.vuetifyjs.com/images/john.jpg"> -->
                             <v-img v-bind:src="userInfo.avatar" ></v-img>
                         </v-item-avatar>
-                        <v-flex text-center pt-5>
-                            <h1> {{userInfo.username}}</h1>
-                            <p> {{userInfo.username}} </p>
-                            <v-text class="money"> 10000 </v-text>
-                            <v-text> NB </v-text>
+                        <v-flex text-center>
+                            <v-text class="money primary--text">Have a nice day, {{userInfo.username}}</v-text>
+                            <p></p>
+                            <v-text class="money primary--text"> You've got {{userInfo.money}} </v-text>
+                            <v-text class="money primary--text"> NB </v-text>
                         </v-flex>
                     </v-layout>
                     </v-flex>
 
                 </v-col>
 
-                <v-col cols="12" sm="6">
-
-                    <v-layout column pa-5>
-                        <v-flex pa-2 mt-15>
-                            <v-text class="gallery"> My Gallery </v-text>
+                <v-col cols="12" sm="6" class="bg">
+                    <v-flex >
+                    <v-layout column pl-5 pr-5>
+                        <v-flex >
+                            <v-text class="gallery primary--text">My Collection</v-text>
                             <v-carousel
                                 cycle
-                                height="220"
+                                height="260"
                                 hide-delimiters
                                 show-arrows-on-hover
                             >
@@ -41,11 +41,11 @@
                             </v-carousel>
                         </v-flex>   
                             
-                            <v-flex pa-2 mt-15>
-                                <v-text class="gallery"> Wish List </v-text>
+                            <v-flex>
+                                <v-text class="gallery primary--text"> Wish List </v-text>
                             <v-carousel
                                 cycle
-                                height="220"
+                                height="260"
                                 hide-delimiters
                                 show-arrows-on-hover
                             >
@@ -57,14 +57,14 @@
                                 </v-carousel-item>
                             </v-carousel>
                         </v-flex>  
-                    </v-layout></v-col>
-            </v-layout>
+                        
+                    </v-layout></v-flex></v-col>
+            </v-row>
 
         <v-footer
     padless
     fixed
-    width="0"
-  >
+    width="0">
     <v-card
       flat tile class="ma-10"
     >
@@ -76,7 +76,7 @@
     </v-card>
 </v-footer>
 </v-container>
-</v-main>
+</v-content>
 </v-app>    
 </template>
 
@@ -151,14 +151,11 @@ export default {
   font-weight: 500;
   font-style: normal;
   font-size: 30px;
-  margin-top: 70px;
-  color: white
-
 }
 
 
 
 .bg {
-    background-color: black;
+    background-color: rgb(248, 248, 248);
 }
 </style>

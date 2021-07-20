@@ -31,6 +31,9 @@
         >
           미술관 둘러보기
         </v-btn>
+        <audio  id="audioval" 
+          src="https://server38.freeconvert.com/converted/ebc491017253/Bubble-Jump_AdobeStock_331813116_preview.mp3"
+        autoplay loop></audio>
     </v-row>  
     </v-col>
   </v-container>
@@ -48,14 +51,14 @@
               width="180"
               src="./assets/main_1.svg"
               contain
-              
+              :class="isFilter"
             ></v-img>
             <v-img
               v-else
               width="180"
               src="./assets/main_2.svg"
               contain
-          
+              :class="isFilter"
             ></v-img>
           </v-hover>
           </v-col>
@@ -262,7 +265,15 @@ export default {
     ],
   }),
   computed:{
-    ...mapState(["isLogin"])
+    ...mapState(["isLogin"]),
+    isFilter(){
+      if (this.$route.name=='mypage'){
+        return "title"
+      }
+      else{
+        return ""
+      }
+    }
   },
   methods: {
     openDialog(){
