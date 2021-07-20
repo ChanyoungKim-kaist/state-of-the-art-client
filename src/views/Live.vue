@@ -46,7 +46,7 @@
                         width="170"
                         height="60"
                         rounded
-                        color="black cyan--text"
+                        color="yellow black--text"
                         raised
                         :ripple="false"
                         :disabled="isIn"
