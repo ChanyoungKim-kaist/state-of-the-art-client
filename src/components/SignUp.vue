@@ -88,7 +88,7 @@
 
 <script>
 import { validationMixin } from 'vuelidate'
-import router from '../router/index'
+// import router from '../router/index'
 // import { mapActions} from "vuex"
 import axios from "axios"
 import { required, maxLength, email } from 'vuelidate/lib/validators'
@@ -142,10 +142,10 @@ import { required, maxLength, email } from 'vuelidate/lib/validators'
           password : this.password,
           username : this.nickname
         }
-        axios.post("", signObj)
+        axios.post("http://192.249.18.172:80/register", signObj)
           .then(res=>{ 
                 if (res.data.ok) {
-                  router.push({name: "home"})
+                  this.dialog = false
                 }
             })
             .catch(()=>{ alert('회원가입 통신 실패') })

@@ -119,7 +119,17 @@ export default new Vuex.Store({
     INITIALIZE_SCENE(state) {
       state.scene = new Scene();
       var img = require('./space.jpg')
-      var img2 = require('../assets/pictures/pictures1.jpeg')
+      var img0 = require('../assets/origin/origin0.jpeg')
+      var img1 = require('../assets/origin/origin1.jpeg')
+      var img2 = require('../assets/origin/origin2.jpeg')
+      var img3 = require('../assets/origin/origin3.jpeg')
+      var img4 = require('../assets/origin/origin4.jpeg')
+      var img5 = require('../assets/origin/origin5.jpeg')
+      var img6 = require('../assets/origin/origin6.jpeg')
+      var img7 = require('../assets/origin/origin7.jpeg')
+      var img8 = require('../assets/origin/origin8.jpeg')
+      var img9 = require('../assets/origin/origin9.jpeg')
+      var img10 = require('../assets/origin/origin10.jpeg')
       state.scene.background = new TextureLoader().load(img);
       //state.scene.fog = new FogExp2(0xcccccc, 0.002);
 
@@ -129,14 +139,22 @@ export default new Vuex.Store({
         var material = new MeshStandardMaterial( {color: 0xffffff, map: texture});
         var mesh = new Mesh(geometry, material);
         //mesh.position.y = 2.5
-        mesh.position.setFromCylindricalCoords(random(15,25), random(-Math.PI * 2, Math.PI * 2), 2.5)
+        mesh.position.setFromCylindricalCoords(random(15,40), random(-Math.PI * 2, Math.PI * 2), 2.5)
         mesh.lookAt(0,2,0)
         state.scene.add(mesh);
       }
 
-      for (let i=0; i<10; i++){
-        addBox(img2)
-      }
+      addBox(img0)
+      addBox(img1)
+      addBox(img2)
+      addBox(img3)
+      addBox(img4)
+      addBox(img5)
+      addBox(img6)
+      addBox(img7)
+      addBox(img8)
+      addBox(img9)
+      addBox(img10)
 
       function random(min, max) {
         return min + Math.random() * (max-min);
@@ -171,9 +189,9 @@ export default new Vuex.Store({
       // state.scene.add(lightB);
       // var lightC = new AmbientLight(0x222222);
       // state.scene.add(lightC);
-      var img3 = require('./space.jpg')
+      var bg = require('./space.jpg')
       var groundGeo = new PlaneBufferGeometry(105, 105)
-      var groundTex = new TextureLoader().load(img3)
+      var groundTex = new TextureLoader().load(bg)
       var groundMat = new MeshLambertMaterial({side: DoubleSide, map: groundTex})
       //groundMat.color.setHSL(0.095, 1, 0.75)
       var ground = new Mesh(groundGeo, groundMat)
@@ -325,7 +343,7 @@ export default new Vuex.Store({
             "token": token
           }
         }
-      axios.post("http://192.249.18.172:80/logout", config)
+      axios.get("http://192.249.18.172:80/logout", config)
         .then(res2=>{
           if (res2.data.ok) 
             alert('로그아웃되었습니다.')
@@ -347,7 +365,7 @@ export default new Vuex.Store({
         }
         // 토큰 -> userinfo 반환
         // 새로고침 -> 토큰만 가지고 userinfo 요청
-        axios.get("http://192.249.18.172:80/login/request_userinfo/", config)
+        axios.get("http://192.249.18.172:80/login/request_userinfo", config)
           .then(response=>{ 
             if (response.data.ok) {
               let userinfo = {

@@ -44,6 +44,7 @@
         <v-toolbar flat >
           <v-spacer></v-spacer>
           <v-toolbar-title
+          @click="dialog = false"
             class="toolbar-font primary--text"
           >Sign in</v-toolbar-title>
           <v-spacer></v-spacer>
