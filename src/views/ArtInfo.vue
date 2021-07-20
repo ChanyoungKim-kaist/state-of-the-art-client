@@ -227,7 +227,7 @@ export default {
                         "token": this.token
                     }
             }
-            axios.post("http://192.249.18.172:80/drawings/wishlist", data, this.config)
+            axios.post("http://192.249.18.172:80/drawings/wishlist", {data: data}, this.config)
             .then(res=>{ 
                 if (res.data.ok) {
                     alert('위시리스트가 수정되었습니다.')

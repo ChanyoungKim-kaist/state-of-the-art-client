@@ -11,12 +11,12 @@
                             <v-img v-bind:src="userInfo.avatar" ></v-img>
                         </v-avatar>
                         <v-flex text-center>
-                            <v-text class="money primary--text">Have a nice day,</v-text>
-                            <v-text class="money">{{userInfo.username}}</v-text>
+                            <v-text class="money">Have a nice day,</v-text>
+                            <v-text class="money primary--text">{{userInfo.username}}</v-text>
                             <p></p>
-                            <v-text class="money primary--text"> You've got  </v-text>
-                            <v-text class="money"> {{userInfo.money}} </v-text>
-                            <v-text class="money primary--text"> NB </v-text>
+                            <v-text class="money"> You've got  </v-text>
+                            <v-text class="money primary--text"> {{userInfo.money}} </v-text>
+                            <v-text class="money"> NB </v-text>
                         </v-flex>
                     </v-layout>
                     </v-flex>
@@ -30,7 +30,7 @@
                             <v-text class="gallery primary--text">My Collection</v-text>
                             <v-carousel
                                 cycle
-                                height="auto"
+                                height="300"
                                 hide-delimiters
                                 show-arrows-on-hover
                             >
@@ -47,7 +47,7 @@
                                 <v-text class="gallery primary--text"> Wish List </v-text>
                             <v-carousel
                                 cycle
-                                height="auto"
+                                height="300"
                                 hide-delimiters
                                 show-arrows-on-hover
                             >

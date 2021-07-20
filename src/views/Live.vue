@@ -277,7 +277,7 @@
         </v-layout>
       </v-container>
 
-      <v-container v-else-if="isFinish">
+      <v-container v-else-if="isMine">
           <v-layout justify-center align-center style="height: 700px">
           <v-flex xs12 text-center class="title">
                 <h1> 축하합니다! 입찰에 성공했습니다. 🎉 </h1>
@@ -327,7 +327,6 @@ export default {
     },
     data() {
         return {
-            isFinish: false,
             isIn : false,
             change : false,
             currentUsers: [],
@@ -347,8 +346,8 @@ export default {
             timePassed: 0,
             connection: null,
             picture: null,
-            marker: true
-
+            marker: true,
+            isMine: false
         }
     },
     created: function() {
@@ -488,7 +487,7 @@ export default {
                 console.log(this.timeline, this.timePassed, this.countDown)
                 if (this.countDown == 0) {
                     localStorage.setItem("BidIn", false) 
-                    if (this.timeline[this.timeline.length -1].user_id == "userInfo".username ) {
+                    if (this.timeline[this.timeline.length -1].user_id == this.userInfo.username ) {
                         axios.post("http://192.249.18.172:80/drawings/myart", this.timeline[this.timeline.length -1].price, this.config)
                         .then(res=>{ 
                             if (res.data.ok) {
@@ -496,9 +495,11 @@ export default {
                             }
                         })
                         .catch(()=>{ alert('통신 실패') })
+                        this.isMine = true
                     }
+                    else this.isNow = false
 
-                    this.isNow = false
+                    
 
                 }
              }
