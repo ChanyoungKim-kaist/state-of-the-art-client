@@ -1,25 +1,59 @@
 <template>
-<v-container fluid >
-    <v-layout column>
-        <v-flex xs12 text-center class="title">
-            <h1> 같은 그림 찾기 🎨 </h1>
-            <p> 미니게임을 통해 머니를 획득할 수 있어요! </p>
+<v-app fill height>
+<v-main class="pa-16 bg">
+    <v-row>
+        <v-col>
+        <v-flex xs12 text-start class="title mt-10">
+            <p aria-label="CodePen">
+            <span data-text="M">M</span>
+            <span data-text="E">E</span>
+            <span data-text="M">M</span>
+            <span data-text="O">O</span>
+            <span data-text="R">R</span>
+            <span data-text="Y">Y</span>
+            </p>
+            <p aria-label="CodePen">
+            <span data-text="G">G</span>
+            <span data-text="A">A</span>
+            <span data-text="M">M</span>
+            <span data-text="E">E</span>
+            </p>
         </v-flex>
-
-        
-        <v-flex xs12 text-center class="title2">
-            <v-btn block @click="gameStart">GameStart</v-btn>
-            <h1> score : <span id='score'>0</span></h1>
-            <p id='info'> 게임시작 버튼을 눌러주세요.<br> </p>
+        <v-flex text-center>
+            <v-hover v-slot="{hover}">
+                <v-btn class="mt-10 startbtn blue yellow--text" rounded v-if="hover" @click="gameStart">Game Start</v-btn>
+                <v-btn class="mt-10 startbtn yellow red--text" rounded v-else @click="gameStart">Game Start</v-btn>
+                
+            </v-hover>
         </v-flex>
-
+        <v-flex text-center>
+            <v-hover v-slot="{hover}">
+                <v-text v-if="hover"
+                    class="gametext white--text">
+                    score : <span id='score'>0</span>
+                </v-text>
+                <v-text v-else
+                    class="gametext">
+                    score : <span id='score'>0</span>
+                </v-text>
+            </v-hover>
+            
+        </v-flex>
+        </v-col>
+        <v-col justify="center" align="center">
         <v-flex xs12 text-center id="gameDiv"> 
-            <div id='countDown'>READY</div>
-            <table id="cardTable"></table>
+            <div id='countDown' class="gametext">READY</div>
+            <table id="cardTable" class="gametext"></table>
         </v-flex>
-    </v-layout>
-</v-container>
+        </v-col>
+    </v-row>
+</v-main>
+</v-app>
 </template>
+
+
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -194,6 +228,43 @@ export default {
 </script>
 
 <style scoped>
+
+.startbtn{
+    font-family: game;
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.gametext{
+    font-family: game;
+    font-size: 30px;
+}
+
+@font-face {
+    font-family: "game";
+    src: local("game"), url(../assets/fonts/game.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "loveyou";
+    src: local("loveyou"), url(../assets/fonts/loveyou.otf) format("opentype");
+}
+@font-face {
+    font-family: "new_facebok";
+    src: local("new_facebok"), url(../assets/fonts/new_facebok.ttf) format("truetype");
+}
+@font-face {
+    font-family: "square";
+    src: local("square"), url(../assets/fonts/square.ttf) format("truetype");
+}
+@font-face {
+    font-family: "Computerfont";
+    src: local("Computerfont"), url(../assets/fonts/Computerfont.ttf) format("truetype");
+}
+    .bg{
+        background-color:#757575;
+    }
 #same_game{
     display: inline-block;
     width: 80%;
@@ -229,13 +300,84 @@ button {
 
 .title {
     padding-top: 30px;
-    font-family: KakaoBig,Apple SD Gothic Neo,Malgun Gothic,맑은 고딕,sans-serif;
+    font-family: KakaoBig,Apple SD Gothic Neo,Malgun Got hic,맑은 고딕,sans-serif;
     font-size: 46px;
     line-height: 60px;
     color: var(--baseForeground);
     letter-spacing: -1px;
     background-size: 72px 72px;
 }
+
+
+p {
+  color: rgb(0, 255, 42);
+  font-family: Computerfont, serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+p span {
+  display: inline-block;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 500;
+  -webkit-font-smoothing: antialiased;
+}
+p span::before,
+p span::after {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: -1px;
+  transform-origin: left top;
+  transition: all ease-out 0.3s;
+  content: attr(data-text);
+}
+p span::before {
+  z-index: 1;
+  color: rgba(0, 0, 0, 0.2);
+  transform: scale(1.1, 1) skew(0deg, 15deg);
+}
+p span::after {
+  z-index: 2;
+  color: rgb(0, 0, 194);
+  /* text-shadow: -1px 0 5px #237c0d, 1px 0 1px rgba(16, 126, 53, 0.8); */
+  transform: rotateY(-40deg);
+}
+p span:hover::before {
+  transform: scale(1.1, 1) skew(0deg, 5deg);
+}
+p span:hover::after {
+  transform: rotateY(-10deg);
+}
+p span + span {
+  margin-left: 0.1rem;
+}
+@media (min-width: 20rem) {
+  p {
+    font-size: 2rem;
+  }
+  p span::before,
+  p span::after {
+    display: block;
+  }
+}
+@media (min-width: 30rem) {
+  p {
+    font-size: 3rem;
+  }
+}
+@media (min-width: 40rem) {
+  p {
+    font-size: 5rem;
+  }
+}
+@media (min-width: 60rem) {
+  p {
+    font-size: 7rem;
+  }
+}
+
+
 
 
 </style>
