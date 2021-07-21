@@ -333,9 +333,7 @@ export default {
             change : false,
             currentUsers: [],
             newprice: null,
-            timerCount: 7,
-            timerCount2: 59,
-            countDown : 7,
+            countDown : 10,
             timeline: [],
             fasttime: '3:30',
             dialog: false,
@@ -443,8 +441,7 @@ export default {
                 "price": this.newprice,
                 "user": this.userInfo.username
             }))
-            this.newprice = null
-            
+            this.newprice = null        
         },
 
         enterAuction() { //경매에 참여하기
@@ -485,7 +482,7 @@ export default {
                 this.currentprice = JSON.parse(Event.data).content.currentPrice
                 this.timePassed = JSON.parse(Event.data).content.timePassed
                 this.currentUsers = JSON.parse(Event.data).content.currentUsers.bidding_participants
-                this.countDown = 7 - this.timePassed
+                this.countDown =  10 - this.timePassed
                 console.log(this.timeline, this.timePassed, this.countDown)
                 if (this.countDown == 0) {
                     localStorage.setItem("BidIn", false) 
