@@ -26,10 +26,11 @@
         <Login></Login></v-row>
     <v-row align="center" justify="center">    
         <v-btn
-          class="fontbtn ml-10 mr-10" width="200 "
+          depressed
+          class="namebtn ml-10 mr-10 mt-5" width="200 "
           text
         >
-          미술관 둘러보기
+          Created by Team-SotA.
         </v-btn>
         <audio  id="audioval" 
           src="https://storage.cloudconvert.com/tasks/7dd9cba2-aed0-46ad-b7ff-1d217b141dbc/Bubble-Jump_AdobeStock_331813116_preview.mp3?AWSAccessKeyId=cloudconvert-production&Expires=1626907093&Signature=nnG43SqMxeV%2BcRQVu4zdpglirAY%3D&response-content-disposition=inline%3B%20filename%3D%22Bubble-Jump_AdobeStock_331813116_preview.mp3%22&response-content-type=audio%2Fmpeg"
@@ -301,6 +302,16 @@ export default {
     /* fill: firebrick; */
     filter: invert(67%) sepia(93%) saturate(5000%) hue-rotate(20deg) brightness(110%) contrast(135%);
   }
+
+.namebtn{
+  font-family: raleway, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  text-transform: none !important;
+  letter-spacing: 0.2px;
+  color: #F73100;
+}
 
 .fontbtn {
   font-family: raleway, sans-serif;

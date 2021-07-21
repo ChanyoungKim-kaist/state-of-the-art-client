@@ -44,7 +44,7 @@
                         width="170"
                         height="60"
                         rounded
-                        color="yellow black--text"
+                        color="yellow secondary--text"
                         raised
                         :ripple="false"
                         :disabled="isIn"
@@ -142,7 +142,8 @@
           >
 
           <v-flex v-if="!change" xs12 text-center class="title">
-            <p class="firstprice mb-8"> {{ ArtInfo.currentprice }} NB  </p>
+            <p class="firstprice mt-4 mb-4">{{ ArtInfo.currentprice }} NB</p>
+            <p class="mprice mb-2">You've got {{ userInfo.money }} NB</p>
             <v-text-field
                 reverse
                 v-if="isIn"
@@ -581,6 +582,15 @@ export default {
     font-style: normal;
     font-size: 30px;
     color:rgb(255, 237, 72);
+    text-shadow: rgba(0, 0, 0, 0.637) 0px 0px 8px;
+}
+
+.mprice{
+    font-family: raleway, noto-sans-cjk-kr;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    color: whitesmoke;
     text-shadow: rgba(0, 0, 0, 0.637) 0px 0px 8px;
 }
 .mybid{
