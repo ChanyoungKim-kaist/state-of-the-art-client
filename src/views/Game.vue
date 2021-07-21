@@ -300,7 +300,7 @@
             <span><i :class="isMarker"></i></span>
         </v-btn>
         <audio  id="audioval" src="../assets/bgm/game1.mp3"
-        autoplay loop></audio>
+        autoplay loop volume="0.2"></audio>
     </v-card>
 </v-footer>
 </v-main>

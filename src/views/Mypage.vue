@@ -73,8 +73,8 @@
         <v-btn @click="Play" fab class=" primary--text" elevation="3">
             <span><i :class="isMarker"></i></span>
         </v-btn>
-        <audio  id="audioval" src="../assets/bgm/mypage.mp3"
-        autoplay loop></audio>
+        <audio id="audioval" src="../assets/bgm/mypage.mp3"
+        autoplay loop volume="0.2"></audio>
     </v-card>
 </v-footer>
 </v-container>
@@ -176,9 +176,11 @@ export default {
         Play()
         {
             var myAudio = document.getElementById("audioval");
+            
             this.marker = !this.marker;
             if(myAudio.paused) {
                 myAudio.play();
+                
             }
             else {
             myAudio.pause();

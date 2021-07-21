@@ -14,7 +14,7 @@
             </v-btn>
             <audio  id="audioval" 
             src="../assets/bgm/product.mp3"
-            autoplay loop></audio>
+            autoplay loop volume="0.2"></audio>
         </v-card>
     </v-footer>
   </div>

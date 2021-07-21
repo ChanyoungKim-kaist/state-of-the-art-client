@@ -357,8 +357,8 @@
         <v-btn @click="Play" fab class=" primary--text" elevation="3">
             <span><i :class="isMarker"></i></span>
         </v-btn>
-        <audio  id="audioval" src="../assets/bgm/live1.mp3"
-        autoplay loop></audio>
+        <audio id="audioval" src="../assets/bgm/live1.mp3"
+        autoplay loop volume="0.2"></audio>
         <audio  id="ching" src="../assets/bgm/ching.mp3"></audio>
     </v-card>
 </v-footer>
