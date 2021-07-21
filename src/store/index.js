@@ -396,7 +396,7 @@ export default new Vuex.Store({
               router.push({name: "home"}) 
             }
           })
-          .catch(()=>{ alert('token 통신 실패') })
+          .catch(()=>{ })
       }
       else {
         router.push({name: "home"}) 
