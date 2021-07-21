@@ -49,14 +49,14 @@
               transition="scale-transition"
               slot-scope="{hover}"
               v-if="hover"
-              width="180"
+              width="210"
               src="./assets/main_1.svg"
               contain
               :class="isFilter"
             ></v-img>
             <v-img
               v-else
-              width="180"
+              width="210"
               src="./assets/main_2.svg"
               contain
               :class="isFilter"
