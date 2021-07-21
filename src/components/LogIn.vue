@@ -19,7 +19,7 @@
           v-bind="attrs"
           v-on="on"
           >
-            ➔
+          <i class="fas fa-hand-point-up fa-3x rotate"></i>
           </v-btn>
           <v-btn
           class="ma-2 primary--text change-font"
@@ -33,7 +33,7 @@
           v-bind="attrs"
           v-on="on"
           >
-            --->
+          <i class="fas fa-hand-point-up fa-3x"></i>
           </v-btn>
           </transition>
           
@@ -145,6 +145,10 @@ import Signup from './SignUp.vue'
   font-style: normal;
   font-size: 30px;
   margin-top: 70px;
+}
 
+.rotate{
+    transform: rotate(360deg);
+    transition: all 0.4s ease-in-out;
 }
 </style>

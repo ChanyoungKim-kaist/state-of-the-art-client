@@ -51,7 +51,7 @@
         <v-btn @click="Play" fab class=" primary--text" elevation="3">
             <span><i :class="isMarker"></i></span>
         </v-btn>
-        <audio  id="audioval" src="https://www.zamzar.com/download.php?uid=6a846a41b61d224729e6fff7e6e15c38-4e892ae119841b18&targetId=A1rZfaiPm4_Y9pY_ZE_Zf5XPkpNjIxyhkM3&fileID=p1fb2fvrr7244cbu58e1vs1a8k4.mp3"
+        <audio  id="audioval" src="../assets/bgm/artinfo1.mp3"
         autoplay loop></audio>
     </v-card>
       </v-footer> 
