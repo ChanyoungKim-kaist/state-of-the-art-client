@@ -2,6 +2,7 @@
 <v-app fill-height>
     <v-main class="cyan darken-3 pt-10" >
       <v-container v-if="isNow" >
+          <LiveEnd></LiveEnd>
         <v-layout row>
           <v-flex xs12 text-center class="title ">
                 <!-- <v-text class="artwork_title">Cleopatra Testing Poisons on Those Condemned to Death</v-text> -->
@@ -142,7 +143,7 @@
           >
 
           <v-flex v-if="!change" xs12 text-center class="title">
-            <p class="firstprice mt-4 mb-4">{{ ArtInfo.currentprice }} NB</p>
+            <p class="firstprice mt-4 mb-2">{{ ArtInfo.currentprice }} NB</p>
             <p class="mprice mb-2">You've got {{ userInfo.money }} NB</p>
             <v-text-field
                 reverse
@@ -279,20 +280,69 @@
         </v-layout>
       </v-container>
 
+      
+
       <v-container v-else-if="isMine">
-          <v-layout justify-center align-center style="height: 700px">
+          <v-dialog
+            v-model="dialog"
+            transition="dialog-bottom-transition"
+            max-width="600px"
+            >
+
+            <v-card class="rounded-xl" >
+                <v-toolbar flat>
+                <v-spacer></v-spacer>
+                <v-toolbar-title
+                @click="dialog = false"
+                    class="toolbar-font secondary--text"
+                >Auction Ended!</v-toolbar-title>
+                <v-spacer></v-spacer>
+                </v-toolbar>
+                <div class="pa-4" align="center">
+                    <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_ftbfp7kr.json"  background="transparent"  speed="1.2"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+                    <v-text class="textfont">축하합니다! 입찰에 성공했습니다. 🎉</v-text>
+                    <v-spacer></v-spacer>
+                    <v-text class="textfont">해당 작품은 마이페이지에서 확인하실 수 있습니다.</v-text>
+                    <v-spacer></v-spacer>
+                    <v-row class="mt-1">
+                    <v-col>
+                    <v-btn
+                    block
+                    depressed
+                    disabled
+                    color="grey"
+                    class="dbtn"
+                    text
+                    @click="dialog = false"
+                    >
+                    CLOSE
+                    </v-btn></v-col>
+                    <v-col><v-btn
+                    block
+                    depressed
+                    color="secondary"
+                    text
+                    class="dbtn"
+                    link router :to="{name: 'mypage'}"
+                    >
+                    VISIT MY PAGE
+                    </v-btn>
+                    </v-col></v-row></div>
+            </v-card>
+            </v-dialog>
+          <!-- <v-layout justify-center align-center style="height: 700px">
           <v-flex xs12 text-center class="title">
                 <h1> 축하합니다! 입찰에 성공했습니다. 🎉 </h1>
                 <v-text> 해당 작품은 마이페이지에서 확인하실 수 있습니다. </v-text>
             </v-flex>
-            </v-layout>
+            </v-layout> -->
       </v-container>
 
       <v-container v-else>
           <v-layout justify-center align-center style="height: 700px">
           <v-flex xs12 text-center class="title">
-                <h1> 지금은 경매 시작 전입니다! 🔔 </h1>
-                <p> 가장 빠른 경매 시작 시간은 {{fastTime}} 입니다. </p>
+                <h class="exp_title white--text"> 지금은 경매 시작 전입니다! 🔔 </h>
+                <p class="textfont white--text"> 가장 빠른 경매 시작 시간은 {{fastTime}} 입니다. </p>
             </v-flex>
             </v-layout>
       </v-container>
@@ -307,8 +357,9 @@
         <v-btn @click="Play" fab class=" primary--text" elevation="3">
             <span><i :class="isMarker"></i></span>
         </v-btn>
-        <audio  id="audioval" src="https://storage.cloudconvert.com/tasks/1a5c33d0-b30e-4906-bae1-69f4a89268c1/live1.mp3?AWSAccessKeyId=cloudconvert-production&Expires=1626885909&Signature=jNcuobZVs5nPkp%2FDLQqsfFcuYDU%3D&response-content-disposition=inline%3B%20filename%3D%22live1.mp3%22&response-content-type=audio%2Fmpeg"
+        <audio  id="audioval" src="../assets/bgm/live1.mp3"
         autoplay loop></audio>
+        <audio  id="ching" src="../assets/bgm/ching.mp3"></audio>
     </v-card>
 </v-footer>
     </v-main>
@@ -318,7 +369,6 @@
 <script>
 import axios from "axios"
 import { mapState } from "vuex"
-
 
 
 export default {
@@ -348,6 +398,7 @@ export default {
             picture: null,
             marker: true,
             isMine: false
+            
         }
     },
     created: function() {
@@ -365,6 +416,7 @@ export default {
             myAudio.pause();
             }
         },
+        
         checkisIn() {
             this.isIn = localStorage.getItem("BidIn")
         },
@@ -441,7 +493,11 @@ export default {
                 "price": this.newprice,
                 "user": this.userInfo.username
             }))
-            this.newprice = null        
+            this.newprice = null
+
+            var myChing = document.getElementById("ching");
+            myChing.play();
+            
         },
 
         enterAuction() { //경매에 참여하기
@@ -497,6 +553,7 @@ export default {
                         .catch(()=>{ alert('통신 실패') })
                         this.isNow = false
                         this.isMine = true
+                        this.dialog = true
                     }
                     else this.isNow = false
                 }
@@ -579,7 +636,7 @@ export default {
     font-family: abril-fatface, noto-sans-cjk-kr;
     font-weight: 400;
     font-style: normal;
-    font-size: 30px;
+    font-size: 45px;
     color:rgb(255, 237, 72);
     text-shadow: rgba(0, 0, 0, 0.637) 0px 0px 8px;
 }
@@ -674,4 +731,25 @@ font-size:16px;
   background-color: transparent;
 }
 
+.toolbar-font{
+  font-family: abril-fatface, serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 30px;
+  margin-top: 70px;
+}
+
+.textfont{
+font-family: source-han-sans-korean, sans-serif;
+font-weight: 400;
+font-style: normal;
+font-size: 16px;
+letter-spacing: -0.1px;
+}
+.dbtn{
+  text-transform: none !important;
+  font-family: raleway, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
 </style>

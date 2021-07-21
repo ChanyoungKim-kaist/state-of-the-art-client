@@ -11,7 +11,7 @@
                             <v-img v-bind:src="userInfo.avatar" ></v-img>
                         </v-avatar>
                         <v-flex text-center>
-                            <v-text class="money">Have a nice day,</v-text>
+                            <v-text class="money">Have a aesthetic day, </v-text>
                             <v-text class="money primary--text">{{userInfo.username}}</v-text>
                             <p></p>
                             <v-text class="money"> You've got  </v-text>
