@@ -333,7 +333,7 @@ export default {
             change : false,
             currentUsers: [],
             newprice: null,
-            countDown : 10,
+            countDown : 15,
             timeline: [],
             fasttime: '3:30',
             dialog: false,
@@ -480,9 +480,9 @@ export default {
                 this.change = true
                 this.timeline= JSON.parse(Event.data).content.previousBids
                 this.currentprice = JSON.parse(Event.data).content.currentPrice
-                this.timePassed = JSON.parse(Event.data).content.timePassed
                 this.currentUsers = JSON.parse(Event.data).content.currentUsers.bidding_participants
-                this.countDown =  10 - this.timePassed
+                this.timePassed = JSON.parse(Event.data).content.timePassed
+                this.countDown =  15 - this.timePassed
                 console.log(this.timeline, this.timePassed, this.countDown)
                 if (this.countDown == 0) {
                     localStorage.setItem("BidIn", false) 

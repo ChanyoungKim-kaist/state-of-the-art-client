@@ -86,9 +86,10 @@
 import {mapState} from "vuex"
 export default {
     beforeMount() {
+        this.getWish()
         this.$store.dispatch('getMemberInfo')
         this.getCollection()
-        this.getWish()
+        
     },
     mounted(){
         this.getCollection()
