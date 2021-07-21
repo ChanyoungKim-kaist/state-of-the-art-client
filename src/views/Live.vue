@@ -485,14 +485,15 @@ export default {
                 this.currentUsers = JSON.parse(Event.data).content.currentUsers.bidding_participants
                 this.countDown = 15 - this.timePassed
                 console.log(this.timeline, this.timePassed, this.countDown)
-                if (this.countDown == 0) {
+                if (this.countDown == 8) {
                     localStorage.setItem("BidIn", false) 
                     if (this.timeline[this.timeline.length -1].user_id == this.userInfo.username ) {
-                        axios.post("http://192.249.18.172:80/drawings/myart", this.timeline[this.timeline.length -1].price, this.config)
+                        axios.post("http://192.249.18.172:80/drawings/myart", { price: this.timeline[this.timeline.length -1].price }, this.config)
                         .then(res=>{ 
                             if (res.data.ok) {
+                                this.$store.dispatch('getMemberInfo')
                                 alert('경매에 성공했습니다.')
-                            }
+                            }else this.$store.dispatch('getMemberInfo')
                         })
                         .catch(()=>{ alert('통신 실패') })
                         this.isNow = false

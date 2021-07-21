@@ -64,7 +64,6 @@ export default new Vuex.Store({
       state.isLoginError = false
       state.userInfo = null
     },
-
     SET_VIEWPORT_SIZE(state, { width, height }) {
       state.width = width;
       state.height = height;
@@ -391,7 +390,7 @@ export default new Vuex.Store({
                 MyArt : response.data.data.MyArt
               }
               commit('loginSuccess', userinfo)
-              router.push({name: "home"}) 
+              //router.push({name: "home"}) 
             } else {
               alert('이메일과 비밀번호를 확인하세요.')
               router.push({name: "home"}) 

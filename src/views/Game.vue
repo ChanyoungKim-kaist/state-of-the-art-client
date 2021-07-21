@@ -349,7 +349,7 @@ function setTable() {
         var idx = generateRandom(0, 15-i)
         var img = cards.splice(idx,1)
 
-        cardTableCode += '<td id="card' + i + '" style="border:solid #9DCEFF; width: 110px; height: 110px;"><img src="'+img+'" style="width: 100px;"><span >?</span></td>'
+        cardTableCode += '<td id="card' + i + '" style="border:solid #ffffff; width: 110px; height: 110px;"><img src="'+img+'" style="width: 100px;"><span >?</span></td>'
     }
     cardTableCode += '</tr>'
     $('#cardTable').html(cardTableCode)
@@ -415,11 +415,11 @@ $(document).on('click','#cardTable td' ,function(){
                         headers: {
                             "token": this.token
                         }}
-                axios.post("http://192.249.18.172:80/game", score, this.config)
+                axios.post("http://192.249.18.172:80/game", {score: score}, this.config)
                     .then( res => {
                         if (!res.data.ok) {
                             alert ('점수 등록에 실패했습니다.')
-                        }
+                        } else alert('gg')
                     })
                     .catch( () => {
                         alert('통신 실패')

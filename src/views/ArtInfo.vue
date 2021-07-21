@@ -229,7 +229,8 @@ export default {
             }
             axios.post("http://192.249.18.172:80/drawings/wishlist", {data: data}, this.config)
             .then(res=>{ 
-                if (res.data.ok) {
+                if (!res.data.ok) {
+                    this.$store.dispatch('getMemberInfo')
                     alert('위시리스트가 수정되었습니다.')
                 }
             })
