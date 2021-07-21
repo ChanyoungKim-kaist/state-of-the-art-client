@@ -73,7 +73,7 @@
         <v-btn @click="Play" fab class=" primary--text" elevation="3">
             <span><i :class="isMarker"></i></span>
         </v-btn>
-        <audio  id="audioval" src="https://storage.cloudconvert.com/tasks/0c8ea51a-2591-4217-96d5-869b8b97fa19/mypage.mp3?AWSAccessKeyId=cloudconvert-production&Expires=1626906819&Signature=ZCN1kmEVV7hYe%2BU2LuK6cDWwKfA%3D&response-content-disposition=inline%3B%20filename%3D%22mypage.mp3%22&response-content-type=audio%2Fmpeg"
+        <audio  id="audioval" src="../assets/bgm/mypage.mp3"
         autoplay loop></audio>
     </v-card>
 </v-footer>

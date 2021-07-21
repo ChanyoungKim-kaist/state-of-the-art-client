@@ -282,8 +282,8 @@
 
         </v-col>
         <v-col justify="center" align="center">
-        <v-flex xs12 text-center id="gameDiv"> 
-            <div id='countDown' class="gametext">READY</div>
+        <v-flex text-center id="gameDiv" ma-6> 
+            <p id='countDown' class="coun">Press GAME START</p>
             <table id="cardTable" class="gametext"></table>
         </v-flex>
         </v-col>
@@ -299,7 +299,7 @@
         <v-btn @click="Play" fab class=" primary--text" elevation="3">
             <span><i :class="isMarker"></i></span>
         </v-btn>
-        <audio  id="audioval" src="https://www.zamzar.com/download.php?uid=6a846a41b61d224729e6fff7e6e15c38-7edc1b8b499b299f&targetId=A1rZfaiPm4_Y9pY_ZE_Zf5XPkpNjIxyhkM3&fileID=p1fb2fvrrdohmed513m0nva140q5.mp3"
+        <audio  id="audioval" src="../assets/bgm/game1.mp3"
         autoplay loop></audio>
     </v-card>
 </v-footer>
@@ -349,7 +349,7 @@ function setTable() {
         var idx = generateRandom(0, 15-i)
         var img = cards.splice(idx,1)
 
-        cardTableCode += '<td id="card' + i + '" style="border:solid #9DCEFF; width: 110px; height: 110px;"><img src="'+img+'" style="width: 100px;"><span >?</span></td>'
+        cardTableCode += '<td id="card' + i + '" style="border:solid rgb(256,256,256); width: 110px; height: 110px;"><img src="'+img+'" style="width: 100px;"><span >?</span></td>'
     }
     cardTableCode += '</tr>'
     $('#cardTable').html(cardTableCode)
@@ -409,7 +409,7 @@ $(document).on('click','#cardTable td' ,function(){
             openCardId2 = ''
             scorePlus()
             if(++openedCtn == 8){
-                alert('성공! \n'+score+'점 입니다!')
+                alert('성공!!!\n'+score+'점 입니다!\nMy Page에서 늘어난 재산을 확인하세요!')
                 this.token = localStorage.getItem("access_token")
                 this.config = {
                         headers: {
@@ -420,6 +420,7 @@ $(document).on('click','#cardTable td' ,function(){
                         if (!res.data.ok) {
                             alert ('점수 등록에 실패했습니다.')
                         }
+                        
                     })
                     .catch( () => {
                         alert('통신 실패')
@@ -535,6 +536,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 .gametext{
     font-family: game;
+    color: rgb(32, 32, 170);
     font-size: 30px;
 }
 
@@ -604,7 +606,12 @@ button {
     letter-spacing: -1px;
     background-size: 72px 72px;
 }
-
+.coun{
+    font-family: game;
+    font-size: 50px;
+    line-height: 60px;
+    color: rgb(0, 255, 55);
+}
 
 p {
   color: rgb(0, 255, 42);
@@ -706,13 +713,14 @@ body {
     --rotate-y: 40deg;
     transform-style: preserve-3d;
     transform: rotateX(-35deg) rotateY(var(--rotate-y));
-    animation: wrapper2 20s linear infinite;
+    animation: wrapper2 30s ease-in-out infinite;
 }
 
 @keyframes wrapper2{
-    0% {transform: rotateX(-55deg) rotateY(0deg) rotateZ(0deg);}
-    50% {transform: rotateX(10deg) rotateY(180deg) rotateZ(-30deg);}
-    100% {transform: rotateX(-55deg) rotateY(360deg) rotateZ(0deg);}
+    0% {transform: rotateX(-45deg) rotateY(0deg) rotateZ(15deg);}
+    50% {transform: rotateX(-5deg) rotateY(210deg) rotateZ(10deg);}
+    70% {transform: rotateX(-25deg) rotateY(-100deg) rotateZ(0deg);}
+    100% {transform: rotateX(-45deg) rotateY(360deg) rotateZ(15deg);}
 
 }
 

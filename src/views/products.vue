@@ -13,7 +13,7 @@
                 <span><i :class="isMarker"></i></span>
             </v-btn>
             <audio  id="audioval" 
-            src="https://storage.cloudconvert.com/tasks/40f7c442-1eb6-4442-a5ac-b118c22d3ff2/Thankfulness_AdobeStock_331363115_preview.mp3?AWSAccessKeyId=cloudconvert-production&Expires=1626906407&Signature=Hkj5OD1yXrFKHRRK%2BN3FTb5Dop0%3D&response-content-disposition=inline%3B%20filename%3D%22Thankfulness_AdobeStock_331363115_preview.mp3%22&response-content-type=audio%2Fmpeg"
+            src="../assets/bgm/product.mp3"
             autoplay loop></audio>
         </v-card>
     </v-footer>
