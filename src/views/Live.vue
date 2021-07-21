@@ -160,7 +160,7 @@
             <v-hover v-slot="{hover}">
                 <v-btn 
                 v-if="hover"
-                :disabled="newprice <= ArtInfo.currentprice"
+                :disabled="newprice <= ArtInfo.currentprice || ArtInfo.currentPrice > userInfo.money || newprice > userInfo.money"
                 elevation="2"
                 fab
                 height="100px"
@@ -176,7 +176,7 @@
                 </v-btn>
                 <v-btn 
                 v-else
-                :disabled="newprice <= ArtInfo.currentprice"
+                :disabled="newprice <= ArtInfo.currentprice || ArtInfo.currentPrice > userInfo.money || newprice > userInfo.money"
                 elevation="2"
                 fab
                 height="100px"
@@ -198,6 +198,7 @@
 
         <v-flex v-else xs12 text-center class="title">
             <p class="firstprice mb-8"> {{ currentprice }} NB  </p>
+            <p class="mprice mb-2">You've got {{ userInfo.money }} NB</p>
             <v-text-field 
                 reverse
                 v-if="isIn"
@@ -215,7 +216,7 @@
             <v-hover v-slot="{hover}">
                 <v-btn 
                 v-if="hover"
-                :disabled="newprice <= currentprice"
+                :disabled="newprice <= currentprice || currentprice > userInfo.money || newprice > userInfo.money"
                 elevation="2"
                 fab
                 height="100px"
@@ -230,7 +231,7 @@
                 </v-btn>
                 <v-btn 
                 v-else
-                :disabled="newprice <= currentprice"
+                :disabled="newprice <= currentprice || currentprice > userInfo.money || newprice > userInfo.money"
                 elevation="2"
                 fab
                 height="100px"
@@ -332,9 +333,9 @@ export default {
             change : false,
             currentUsers: [],
             newprice: null,
-            timerCount: 15,
+            timerCount: 7,
             timerCount2: 59,
-            countDown : 15,
+            countDown : 7,
             timeline: [],
             fasttime: '3:30',
             dialog: false,
@@ -484,9 +485,9 @@ export default {
                 this.currentprice = JSON.parse(Event.data).content.currentPrice
                 this.timePassed = JSON.parse(Event.data).content.timePassed
                 this.currentUsers = JSON.parse(Event.data).content.currentUsers.bidding_participants
-                this.countDown = 15 - this.timePassed
+                this.countDown = 7 - this.timePassed
                 console.log(this.timeline, this.timePassed, this.countDown)
-                if (this.countDown == 8) {
+                if (this.countDown == 0) {
                     localStorage.setItem("BidIn", false) 
                     if (this.timeline[this.timeline.length -1].user_id == this.userInfo.username ) {
                         axios.post("http://192.249.18.172:80/drawings/myart", { price: this.timeline[this.timeline.length -1].price }, this.config)

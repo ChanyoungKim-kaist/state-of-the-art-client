@@ -311,7 +311,7 @@
 
 <script>
 
-
+import axios from "axios"
 // 게임 상태
 var gameState = ''
 
@@ -414,16 +414,17 @@ $(document).on('click','#cardTable td' ,function(){
                 this.config = {
                         headers: {
                             "token": this.token
-                        }}
+                }}
                 axios.post("http://192.249.18.172:80/game", {score: score}, this.config)
                     .then( res => {
                         if (!res.data.ok) {
                             alert ('점수 등록에 실패했습니다.')
-                        } else alert('gg')
+                        } 
                     })
                     .catch( () => {
                         alert('통신 실패')
                     })
+                this.$store.dispatch('getMemberInfo')
 
             }
         }else { //불일치
