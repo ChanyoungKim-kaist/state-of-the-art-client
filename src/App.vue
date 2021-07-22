@@ -33,8 +33,8 @@
           Created by Team-SotA.
         </v-btn>
         <audio  id="audioval" 
-          src="https://storage.cloudconvert.com/tasks/7dd9cba2-aed0-46ad-b7ff-1d217b141dbc/Bubble-Jump_AdobeStock_331813116_preview.mp3?AWSAccessKeyId=cloudconvert-production&Expires=1626907093&Signature=nnG43SqMxeV%2BcRQVu4zdpglirAY%3D&response-content-disposition=inline%3B%20filename%3D%22Bubble-Jump_AdobeStock_331813116_preview.mp3%22&response-content-type=audio%2Fmpeg"
-        autoplay control loop volume="0.2"></audio>
+          src="./assets/bgm/intro.mp3"
+        autoplay loop></audio>
     </v-row>  
     </v-col>
   </v-container>
